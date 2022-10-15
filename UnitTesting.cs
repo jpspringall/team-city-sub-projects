@@ -24,5 +24,15 @@ namespace TCSonarCube
             42.Should().Be(42);
             42.Should().Be(42);
         }
+
+        [Fact]
+        public void Bug()
+        {
+            int target = -5;
+            int num = 3;
+
+            target = -num;  // Noncompliant; target = -3. Is that really what's meant?
+            target = +num; // Noncompliant; target = 3
+        }
     }
 }
