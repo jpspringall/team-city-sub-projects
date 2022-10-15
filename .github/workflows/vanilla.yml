@@ -1,4 +1,4 @@
-name: Build
+name: Vanilla Build
 on:
   push:
     branches:
