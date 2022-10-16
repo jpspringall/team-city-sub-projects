@@ -38,7 +38,6 @@ namespace WebApplicationForTesting.Controllers
         public int DuplicateCodeBranch()
         {
             return new ClassLibraryForTesting.TestClass().DuplicateCodeBranch();
-            return new ClassLibraryForTesting.TestClass().DuplicateCodeBranch();
         }
 
         [HttpGet(Name = "DuplicateCodeBranch2")]
