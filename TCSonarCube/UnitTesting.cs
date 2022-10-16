@@ -39,7 +39,6 @@ namespace TCSonarCube
         public void WebApp()
         {
             3.Should().Be(new WebApplicationForTesting.Controllers.WeatherForecastController().BuggyCodeBranch());
-            3.Should().Be(new WebApplicationForTesting.Controllers.WeatherForecastController().BuggyCodeBranch());
         }
     }
 }
