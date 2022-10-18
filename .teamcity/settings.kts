@@ -82,7 +82,7 @@ object Build : BuildType({
         exec {
             name = "Run Script"
             path = "ci/run-sonar.sh"
-            arguments = """"arg1" "arg2""""
+            arguments = """"%sonar.pullrequest.key%" "%sonar.pullrequest.branch%""""
             formatStderrAsError = true
             dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
             dockerImage = "emeraldsquad/sonar-scanner-net"
