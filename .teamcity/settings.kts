@@ -79,6 +79,14 @@ object Build : BuildType({
                 echo "##teamcity[setParameter name='sonar.pullrequest.branch' value='${'$'}branch']"
             """.trimIndent()
         }
+        exec {
+            name = "Run Script"
+            path = "ci/run-sonar.sh"
+            arguments = """"arg1" "arg2""""
+            formatStderrAsError = true
+            dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
+            dockerImage = "emeraldsquad/sonar-scanner-net"
+        }
         script {
             name = "Sonar Cube Run Scan"
             scriptContent = """
@@ -119,14 +127,6 @@ object Build : BuildType({
             param("sonarProjectName", "SonarCubeTest")
             param("sonarProjectKey", "SonarCubeTest")
             param("sonarServer", "f7994fe6-39ec-4a04-8c8a-261e630fe753")
-        }
-        exec {
-            name = "Run Script"
-            path = "ci/run-sonar.sh"
-            arguments = """"arg1" "arg2""""
-            formatStderrAsError = true
-            dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
-            dockerImage = "emeraldsquad/sonar-scanner-net"
         }
     }
 
