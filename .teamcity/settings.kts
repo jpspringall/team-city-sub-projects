@@ -38,6 +38,10 @@ version = "2022.04"
 project {
 
     buildType(Build)
+
+    params {
+        param("my.test.parameter", "")
+    }
 }
 
 object Build : BuildType({
