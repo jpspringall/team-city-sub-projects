@@ -153,7 +153,7 @@ object Build : BuildType({
             provider = github {
                 authType = vcsRoot()
                 filterSourceBranch = "+:refs/pull/*/head"
-                filterTargetBranch = "master"
+                filterTargetBranch = "+:refs/heads/master"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
