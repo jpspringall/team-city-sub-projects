@@ -40,6 +40,7 @@ project {
     buildType(Build)
 
     params {
+        param("my.test.parameters", "")
         param("my.test.parameter", "")
     }
 }
