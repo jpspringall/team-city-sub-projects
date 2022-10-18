@@ -1,5 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
+import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.buildSteps.ExecBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.dotnetBuild
@@ -143,6 +145,16 @@ object Build : BuildType({
                 authType = personalToken {
                     token = "credentialsJSON:22719b77-2b1e-4b10-be8b-6cab49c7c069"
                 }
+            }
+        }
+        pullRequests {
+            enabled = false
+            vcsRootExtId = "${DslContext.settingsRoot.id}"
+            provider = github {
+                authType = vcsRoot()
+                filterSourceBranch = "+:refs/pull/*/head"
+                filterTargetBranch = "+:refs/heads/master"
+                filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
     }
