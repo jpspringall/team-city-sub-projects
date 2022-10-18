@@ -1,8 +1,10 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
+import jetbrains.buildServer.configs.kotlin.buildSteps.ExecBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.dotnetBuild
 import jetbrains.buildServer.configs.kotlin.buildSteps.dotnetTest
+import jetbrains.buildServer.configs.kotlin.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.buildSteps.nuGetInstaller
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
@@ -117,6 +119,14 @@ object Build : BuildType({
             param("sonarProjectName", "SonarCubeTest")
             param("sonarProjectKey", "SonarCubeTest")
             param("sonarServer", "f7994fe6-39ec-4a04-8c8a-261e630fe753")
+        }
+        exec {
+            name = "Run Script"
+            path = "ci/run-sonar.sh"
+            arguments = """"arg1" "arg2""""
+            formatStderrAsError = true
+            dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
+            dockerImage = "emeraldsquad/sonar-scanner-net"
         }
     }
 
