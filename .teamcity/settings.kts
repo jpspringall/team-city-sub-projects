@@ -148,6 +148,7 @@ object Build : BuildType({
             }
         }
         pullRequests {
+            enabled = false
             vcsRootExtId = "${DslContext.settingsRoot.id}"
             provider = github {
                 authType = vcsRoot()
