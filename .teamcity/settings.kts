@@ -151,6 +151,7 @@ object Build : BuildType({
             vcsRootExtId = "${DslContext.settingsRoot.id}"
             provider = github {
                 authType = vcsRoot()
+                filterSourceBranch = "+:refs/pull/*/head"
                 filterTargetBranch = "master"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
