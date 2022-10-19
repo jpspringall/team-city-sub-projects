@@ -116,7 +116,7 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1 : GitVcsRoot({
     name = "Pull Request Build"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
-    branchSpec = "refs/pull/*"
+    branchSpec = "refs/pull/*/head"
     authMethod = password {
         userName = "jpspringall"
         password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
