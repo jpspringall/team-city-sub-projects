@@ -40,7 +40,6 @@ object CommonSteps {
         steps {
             step {
                 name = "Configure Build"
-                type = "build.metadata"
                 val buildConfName = "%teamcity.buildConfName%"
                 print("\nbuildConfName is $buildConfName.")
                 if (buildConfName == "Master Build") {
