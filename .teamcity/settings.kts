@@ -187,6 +187,18 @@ object PullRequestBuild : BuildType({
         vcs {
         }
     }
+
+    features {
+        commitStatusPublisher {
+            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1.id}"
+            publisher = github {
+                githubUrl = "https://api.github.com"
+                authType = personalToken {
+                    token = "credentialsJSON:22719b77-2b1e-4b10-be8b-6cab49c7c069"
+                }
+            }
+        }
+    }
 })
 
 object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1 : GitVcsRoot({
