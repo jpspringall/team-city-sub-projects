@@ -95,7 +95,7 @@ object PullRequestBuild : BuildType({
                 authType = token {
                     token = "credentialsJSON:22719b77-2b1e-4b10-be8b-6cab49c7c069"
                 }
-                filterSourceBranch = "+:refs/pull/*/head"
+                filterSourceBranch = "refs/pull/*"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
@@ -106,7 +106,7 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1 : GitVcsRoot({
     name = "Pull Request Build"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
-    branchSpec = "+:refs/pull/*/head"
+    branchSpec = "refs/pull/*"
     authMethod = password {
         userName = "jpspringall"
         password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
