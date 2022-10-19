@@ -37,11 +37,15 @@ object CommonSteps {
 
     fun BuildType.configureForBuild(
     ) {
-        val buildConfName = "%teamcity.buildConfName%"
-        print("\nbuildConfName is $buildConfName.")
-        if (buildConfName == "Master Build") {
-            params {
-                param("teamcity.pullRequest.number", "master")
+        steps {
+            step {
+                name = "Configure Build"
+                type = "build.metadata"
+                val buildConfName = "%teamcity.buildConfName%"
+                print("\nbuildConfName is $buildConfName.")
+                if (buildConfName == "Master Build") {
+                        param("teamcity.pullRequest.number", "master")
+                }
             }
         }
     }
