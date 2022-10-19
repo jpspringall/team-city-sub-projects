@@ -35,30 +35,22 @@ object CommonSteps {
         }
     }
 
- /*   fun BuildType.configureForBuild(
-    ) {
-        steps {
-           *//* step {
-                name = "Configure Build"
-                val buildConfName = "%teamcity.buildConfName%"
-                print("\nbuildConfName is $buildConfName.")
-                if (buildConfName == "Master Build") {
-                        param("teamcity.pullRequest.number", "master")
-                }
-            }*//*
-        }
-    }*/
-
     fun BuildType.configureSonar(
     ) {
         steps {
             script {
-                name = "Sonar Cube Docker Set Variables"
+                name = "Sonar Set Variables"
+                conditions {
+                    equals("system.teamcity.buildConfName", "Pull Request Build")
+                }
                 scriptContent = """
                 #!/bin/bash
-                branch=%teamcity.pullRequest.number%
-                echo "Extracting Key from: ${'$'}branch"
-                id="${'$'}(cut -d'/' -f2 <<<"${'$'}branch")"
+                id=%teamcity.pullRequest.number%
+                echo "Id is: ${'$'}id"
+                branch="pull/${'$'}id"
+                echo "Branch is: ${'$'}branch"
+                echo "##teamcity[setParameter name='sonar.pullrequest.key' value='${'$'}id']"
+                echo "##teamcity[setParameter name='sonar.pullrequest.branch' value='${'$'}branch']"
             """.trimIndent()
             }
         }
