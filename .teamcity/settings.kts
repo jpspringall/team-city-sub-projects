@@ -1,11 +1,12 @@
+
 import CommonSteps.buildAndTest
-import CommonSteps.sonarTest
+import CommonSteps.configureForBuild
+import CommonSteps.configureSonar
 import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.DslContext
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
-import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.project
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
@@ -50,23 +51,12 @@ object Build : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
-    val buildConfName = "%teamcity.buildConfName%"
-    print("\nbuildConfName is $buildConfName.")
-if ( buildConfName == "Blah") {
-    steps {
-        script {
-            name = "Print Variables"
-            scriptContent = """
-                #!/bin/bash
-                prNumber=%teamcity.pullRequest.number%
-            """.trimIndent()
-        }
-    }
-}
+
+    configureForBuild()
+
+    configureSonar()
 
     buildAndTest()
-
-    sonarTest()
 
     triggers {
         vcs {
@@ -84,20 +74,11 @@ object PullRequestBuild : BuildType({
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
     }
 
- steps {
-     script {
-         name = "Print Variables"
-         scriptContent = """
-                #!/bin/bash
-                prNumber=%teamcity.pullRequest.number%
-                echo "Extracting Key from: ${'$'}prNumber"
-            """.trimIndent()
-     }
- }
+    configureForBuild()
+
+    configureSonar()
 
     buildAndTest()
-
-    sonarTest()
 
     triggers {
         vcs {
