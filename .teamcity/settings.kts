@@ -101,6 +101,7 @@ object PullRequestBuild : BuildType({
                 authType = token {
                     token = "credentialsJSON:22719b77-2b1e-4b10-be8b-6cab49c7c069"
                 }
+                filterSourceBranch = "refs/pull/*/merge"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
