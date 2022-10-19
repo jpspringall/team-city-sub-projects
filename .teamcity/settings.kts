@@ -10,6 +10,7 @@ import jetbrains.buildServer.configs.kotlin.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.buildSteps.nuGetInstaller
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -37,7 +38,10 @@ version = "2022.04"
 
 project {
 
+    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
+
     buildType(Build)
+    buildType(PullRequestBuild)
 
     params {
         param("my.test.parameters", "")
@@ -163,4 +167,29 @@ object Build : BuildType({
             }
         }
     }
+})
+
+object PullRequestBuild : BuildType({
+    name = "Pull Request Build"
+
+    vcs {
+        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
+    }
+
+    triggers {
+        vcs {
+        }
+    }
+})
+
+object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1 : GitVcsRoot({
+    name = "https://github.com/jpspringall/team-city-sonar-cube#refs/heads/master (1)"
+    url = "https://github.com/jpspringall/team-city-sonar-cube"
+    branch = "refs/heads/master"
+    branchSpec = "+:refs/pull/*/merge"
+    authMethod = password {
+        userName = "jpspringall"
+        password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
+    }
+    param("oauthProviderId", "PROJECT_EXT_2")
 })
