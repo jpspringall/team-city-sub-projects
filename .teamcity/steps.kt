@@ -36,8 +36,8 @@ object CommonSteps {
     fun BuildType.sonarTest(
 
     ) {
-        params {
+       /* params {
             param("teamcity.pullRequest.number", "master")
-        }
+        }*/
     }
 }
