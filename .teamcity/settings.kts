@@ -5,6 +5,7 @@ import jetbrains.buildServer.configs.kotlin.DslContext
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.project
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
@@ -69,6 +70,16 @@ object PullRequestBuild : BuildType({
     vcs {
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
     }
+
+ steps {
+     script {
+         name = "Print Variables"
+         scriptContent = """
+                #!/bin/bash
+                prNumber=%teamcity.pullRequest.number%
+            """.trimIndent()
+     }
+ }
 
     buildAndTest()
 
