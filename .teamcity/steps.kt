@@ -35,19 +35,19 @@ object CommonSteps {
         }
     }
 
-    fun BuildType.configureForBuild(
+ /*   fun BuildType.configureForBuild(
     ) {
         steps {
-           /* step {
+           *//* step {
                 name = "Configure Build"
                 val buildConfName = "%teamcity.buildConfName%"
                 print("\nbuildConfName is $buildConfName.")
                 if (buildConfName == "Master Build") {
                         param("teamcity.pullRequest.number", "master")
                 }
-            }*/
+            }*//*
         }
-    }
+    }*/
 
     fun BuildType.configureSonar(
     ) {
@@ -59,8 +59,6 @@ object CommonSteps {
                 branch=%teamcity.pullRequest.number%
                 echo "Extracting Key from: ${'$'}branch"
                 id="${'$'}(cut -d'/' -f2 <<<"${'$'}branch")"
-                echo "##teamcity[setParameter name='sonar.pullrequest.key' value='${'$'}id']"
-                echo "##teamcity[setParameter name='sonar.pullrequest.branch' value='${'$'}branch']"
             """.trimIndent()
             }
         }
