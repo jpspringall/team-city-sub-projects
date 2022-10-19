@@ -1,6 +1,5 @@
 
 import CommonSteps.buildAndTest
-import CommonSteps.configureForBuild
 import CommonSteps.configureSonar
 import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.DslContext
@@ -53,8 +52,6 @@ object Build : BuildType({
         root(DslContext.settingsRoot)
     }
 
-    configureForBuild()
-
     configureSonar()
 
     buildAndTest()
@@ -74,8 +71,6 @@ object PullRequestBuild : BuildType({
     vcs {
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
     }
-
-    configureForBuild()
 
     configureSonar()
 
