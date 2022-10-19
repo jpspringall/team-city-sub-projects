@@ -176,6 +176,13 @@ object PullRequestBuild : BuildType({
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
     }
 
+    steps {
+        nuGetInstaller {
+            toolPath = "%teamcity.tool.NuGet.CommandLine.DEFAULT%"
+            projects = "TCSonarCube.sln"
+        }
+    }
+
     triggers {
         vcs {
         }
