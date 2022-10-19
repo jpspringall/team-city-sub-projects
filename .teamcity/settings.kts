@@ -51,6 +51,16 @@ object Build : BuildType({
         root(DslContext.settingsRoot)
     }
 
+    steps {
+        script {
+            name = "Print Variables"
+            scriptContent = """
+                #!/bin/bash
+                prNumber=%teamcity.pullRequest.number%
+            """.trimIndent()
+        }
+    }
+
     buildAndTest()
 
     sonarTest()
