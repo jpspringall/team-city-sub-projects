@@ -1,2 +1,1 @@
 # team-city-sonar-cube
-
