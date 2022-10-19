@@ -46,7 +46,7 @@ project {
 }
 
 object Build : BuildType({
-    name = "Build"
+    name = "Master"
 
     params {
         param("env.SONAR_TOKEN", "sqp_8ec5dfa55e18c5b3f2a91c35bced2581afe64fbe")
