@@ -1,6 +1,7 @@
 
 import CommonSteps.buildAndTest
 import CommonSteps.configureSonar
+import CommonSteps.createParameters
 import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.DslContext
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
@@ -49,6 +50,8 @@ object Build : BuildType({
         root(DslContext.settingsRoot)
     }
 
+    createParameters()
+
     configureSonar()
 
     buildAndTest()
@@ -68,6 +71,8 @@ object PullRequestBuild : BuildType({
     vcs {
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
     }
+
+    createParameters()
 
     configureSonar()
 

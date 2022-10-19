@@ -56,4 +56,11 @@ object CommonSteps {
         }
     }
 
+    fun BuildType.createParameters(
+    ) {
+        params {
+            param("sonar.pullrequest.key", "master")
+            param("sonar.pullrequest.branch", "master")
+        }
+    }
 }
