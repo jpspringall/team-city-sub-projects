@@ -50,7 +50,9 @@ object Build : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
-
+    val buildConfName = "%teamcity.buildConfName%"
+    print("\nbuildConfName is $buildConfName.")
+if ( buildConfName == "Blah") {
     steps {
         script {
             name = "Print Variables"
@@ -60,6 +62,7 @@ object Build : BuildType({
             """.trimIndent()
         }
     }
+}
 
     buildAndTest()
 
@@ -87,6 +90,7 @@ object PullRequestBuild : BuildType({
          scriptContent = """
                 #!/bin/bash
                 prNumber=%teamcity.pullRequest.number%
+                echo "Extracting Key from: ${'$'}prNumber"
             """.trimIndent()
      }
  }
