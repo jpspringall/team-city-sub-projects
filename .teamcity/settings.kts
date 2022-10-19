@@ -212,7 +212,7 @@ object PullRequestBuild : BuildType({
 })
 
 object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1 : GitVcsRoot({
-    name = "https://github.com/jpspringall/team-city-sonar-cube#refs/heads/master (1)"
+    name = "Pull Request Build"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
     branchSpec = "+:refs/pull/*/merge"
