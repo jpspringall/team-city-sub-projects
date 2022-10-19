@@ -16,13 +16,19 @@ object CommonSteps {
                 name = "Build Solution"
                 projects = "TCSonarCube.sln"
                 sdk = "6"
-                param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
+                param(
+                    "dotNetCoverage.dotCover.home.path",
+                    "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%"
+                )
             }
             dotnetTest {
                 name = "Test Solution"
                 projects = "TCSonarCube.sln"
                 sdk = "6"
-                param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
+                param(
+                    "dotNetCoverage.dotCover.home.path",
+                    "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%"
+                )
             }
         }
     }
@@ -30,6 +36,8 @@ object CommonSteps {
     fun BuildType.sonarTest(
 
     ) {
-
+        params {
+            param("teamcity.pullRequest.number", "master")
+        }
     }
 }

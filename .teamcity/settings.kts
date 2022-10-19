@@ -1,4 +1,3 @@
-
 import CommonSteps.buildAndTest
 import CommonSteps.sonarTest
 import jetbrains.buildServer.configs.kotlin.BuildType
@@ -43,6 +42,7 @@ project {
     buildType(PullRequestBuild)
 }
 
+
 object Build : BuildType({
     name = "Master Build"
 
@@ -72,7 +72,7 @@ object PullRequestBuild : BuildType({
 
     buildAndTest()
 
-    //sonarTest()
+    sonarTest()
 
     triggers {
         vcs {
