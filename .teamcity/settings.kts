@@ -38,7 +38,7 @@ version = "2022.04"
 
 project {
 params {
-    param("teamcity.pullRequest.number", "")
+    param("teamcity.pullRequest.number", "master")
 }
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
     buildType(Build)
