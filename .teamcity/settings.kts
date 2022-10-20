@@ -37,9 +37,6 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2022.04"
 
 project {
-params {
-    param("teamcity.pullRequest.number", "master")
-}
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
     buildType(Build)
     buildType(PullRequestBuild)
