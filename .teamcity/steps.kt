@@ -49,18 +49,8 @@ object CommonSteps {
                 echo "Id is: ${'$'}id"
                 branch="pull/${'$'}id"
                 echo "Branch is: ${'$'}branch"
-                echo "##teamcity[setParameter name='sonar.pullrequest.key' value='${'$'}id']"
-                echo "##teamcity[setParameter name='sonar.pullrequest.branch' value='${'$'}branch']"
             """.trimIndent()
             }
-        }
-    }
-
-    fun BuildType.createParameters(
-    ) {
-        params {
-            param("sonar.pullrequest.key", "master")
-            param("sonar.pullrequest.branch", "master")
         }
     }
 }
