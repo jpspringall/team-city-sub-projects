@@ -1,6 +1,7 @@
 
 import CommonSteps.buildAndTest
 import CommonSteps.configureSonar
+import CommonSteps.createParameters
 import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.DslContext
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
@@ -36,9 +37,6 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2022.04"
 
 project {
-params {
-    param("teamcity.pullRequest.number", "master")
-}
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
     buildType(Build)
     buildType(PullRequestBuild)
@@ -50,6 +48,8 @@ object Build : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+
+    createParameters()
 
     configureSonar()
 
@@ -70,6 +70,8 @@ object PullRequestBuild : BuildType({
     vcs {
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
     }
+
+    createParameters()
 
     configureSonar()
 

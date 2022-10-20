@@ -53,4 +53,11 @@ object CommonSteps {
             }
         }
     }
+
+    fun BuildType.createParameters(
+    ) {
+        params {
+            param("teamcity.pullRequest.number", "master")
+        }
+    }
 }
