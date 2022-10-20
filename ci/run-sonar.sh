@@ -20,7 +20,8 @@ echo "User $user";
 echo "Password $password"
 echo "Number $number"
 
-cd project
+#Not needed for now
+#cd project
 
 dotnet-sonarscanner begin \
     /k:"SonarCubeTest" \
