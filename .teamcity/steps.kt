@@ -58,7 +58,7 @@ object CommonSteps {
                 name = "Run Sonar Script"
                 path = "ci/run-sonar.sh"
                 arguments =
-                    """-s "%env.sonar_server%" -u "%env.sonar_user%" -p "%env.sonar_password%" -n "%teamcity.pullRequest.number%""""
+                    """-s "%env.sonar_server%" -u "%env.sonar_user%" -p "%env.sonar_password%" -n "%teamcity.pullRequest.number%" -v "%build.counter%"""
                 formatStderrAsError = true
                 dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
                 dockerPull = true
@@ -70,7 +70,7 @@ object CommonSteps {
     fun BuildType.createParameters(
     ) {
         params {
-            param("teamcity.pullRequest.number", "master")
+            param("teamcity.pullRequest.number", "")
         }
     }
 }

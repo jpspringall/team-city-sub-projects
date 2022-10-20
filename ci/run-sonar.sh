@@ -3,6 +3,9 @@ set -e
 
 echo "Running Script"
 
+projectKey = "SonarCubeTest"
+projectName = "SonarCubeTest"
+
 while getopts :s:u:p:n:v: flag
 do
     case "${flag}" in
@@ -24,15 +27,30 @@ echo "Number $number"
 #cd project
 #/v:"%build.vcs.number%" \
 
-dotnet-sonarscanner begin \
-    /k:"SonarCubeTest" \
-    /n:"SonarCubeTest" \
+#If no PR number provided
+if [ -z "$number" ]; then
+    echo "Iz empty"
+    dotnet-sonarscanner begin \
+    /k:"$projectKey" \
+    /n:"$projectName" \
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
     /d:sonar.pullrequest.key="$number" \
-    /d:sonar.pullrequest.branch="pull/$number" \
-    /d:sonar.pullrequest.base="master" \
     /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
-dotnet test -v n TCSonarCube.sln --filter 'FullyQualifiedName~Test.Unit' -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "testresults"
-dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
+else
+    echo "Iz NOT empty"
+    dotnet-sonarscanner begin \
+    /k:"$projectKey" \
+    /n:"$projectName" \
+    /d:sonar.host.url="$server" \
+    /d:sonar.login="$user" \
+    /d:sonar.password="$password" \
+    /d:sonar.pullrequest.key="$number" \
+    /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
+    /d:sonar.pullrequest.branch="pull/$number" \
+    /d:sonar.pullrequest.base="master"
+fi
+
+# dotnet test -v n TCSonarCube.sln --filter 'FullyQualifiedName~Test.Unit' -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "testresults"
+# dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
