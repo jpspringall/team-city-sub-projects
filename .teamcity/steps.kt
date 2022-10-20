@@ -40,9 +40,6 @@ object CommonSteps {
         steps {
             script {
                 name = "Sonar Set Variables"
-                conditions {
-                    equals("system.teamcity.buildConfName", "Pull Request Build")
-                }
                 scriptContent = """
                 #!/bin/bash
                 id=%teamcity.pullRequest.number%
