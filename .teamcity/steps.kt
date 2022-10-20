@@ -1,9 +1,6 @@
 
 import jetbrains.buildServer.configs.kotlin.BuildType
-import jetbrains.buildServer.configs.kotlin.buildSteps.dotnetBuild
-import jetbrains.buildServer.configs.kotlin.buildSteps.dotnetTest
-import jetbrains.buildServer.configs.kotlin.buildSteps.nuGetInstaller
-import jetbrains.buildServer.configs.kotlin.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.buildSteps.*
 
 object CommonSteps {
     fun BuildType.buildAndTest(
@@ -35,11 +32,11 @@ object CommonSteps {
         }
     }
 
-    fun BuildType.configureSonar(
+    fun BuildType.printPullRequestNumber(
     ) {
         steps {
             script {
-                name = "Sonar Set Variables"
+                name = "Print Pull Request Number"
                 scriptContent = """
                 #!/bin/bash
                 id=%teamcity.pullRequest.number%
@@ -47,6 +44,25 @@ object CommonSteps {
                 branch="pull/${'$'}id"
                 echo "Branch is: ${'$'}branch"
             """.trimIndent()
+            }
+        }
+    }
+
+    fun BuildType.runSonarScript(
+    ) {
+        //CHANGE THIS BEFORE USING FOR REALZ"
+        val imageRepository = "emeraldsquad"
+        //CHANGE THIS BEFORE USING FOR REALZ"
+        steps {
+            exec {
+                name = "Run Sonar Script"
+                path = "ci/run-sonar.sh"
+                arguments =
+                    """-s "%env.sonar_server%" -u "%env.sonar_user%" -p "%env.sonar_password%" -n "%teamcity.pullRequest.number%""""
+                formatStderrAsError = true
+                dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
+                dockerPull = true
+                dockerImage = "${imageRepository}/sonar-scanner-net" //CHECK IMAGE NAME FOR REALZ
             }
         }
     }

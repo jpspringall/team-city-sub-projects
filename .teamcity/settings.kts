@@ -1,7 +1,8 @@
 
 import CommonSteps.buildAndTest
-import CommonSteps.configureSonar
 import CommonSteps.createParameters
+import CommonSteps.printPullRequestNumber
+import CommonSteps.runSonarScript
 import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.DslContext
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
@@ -51,9 +52,11 @@ object Build : BuildType({
 
     createParameters()
 
-    configureSonar()
+    printPullRequestNumber()
 
     buildAndTest()
+
+    runSonarScript()
 
     triggers {
         vcs {
@@ -73,9 +76,11 @@ object PullRequestBuild : BuildType({
 
     createParameters()
 
-    configureSonar()
+    printPullRequestNumber()
 
     buildAndTest()
+
+    runSonarScript()
 
     triggers {
         vcs {
