@@ -22,11 +22,11 @@ echo "Number $number"
 
 #Not needed for now
 #cd project
+#/v:"%build.vcs.number%" \
 
 dotnet-sonarscanner begin \
     /k:"SonarCubeTest" \
     /n:"SonarCubeTest" \
-    #/v:"%build.vcs.number%" \
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
