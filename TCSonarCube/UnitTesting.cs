@@ -22,7 +22,7 @@ namespace TCSonarCube
             42.Should().Be(42);
             42.Should().Be(42);
             42.Should().Be(42);
-            42.Should().Be(42);
+            42.Should().Be(43);
         }
 
         [Fact]
