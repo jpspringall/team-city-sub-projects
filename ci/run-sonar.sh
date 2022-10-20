@@ -3,8 +3,8 @@ set -e
 
 echo "Running Script"
 
-projectKey = "SonarCubeTest"
-projectName = "SonarCubeTest"
+projectKey="SonarCubeTest"
+projectName="SonarCubeTest"
 
 while getopts :s:u:p:n:v: flag
 do
@@ -22,10 +22,11 @@ echo "Server $server";
 echo "User $user";
 echo "Password $password"
 echo "Number $number"
+echo "Version $version"
 
 #Not needed for now
 #cd project
-#/v:"%build.vcs.number%" \
+
 
 #If no PR number provided
 if [ -z "$number" ]; then
@@ -33,6 +34,7 @@ if [ -z "$number" ]; then
     dotnet-sonarscanner begin \
     /k:"$projectKey" \
     /n:"$projectName" \
+    /v:"%build.vcs.number%" \
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
@@ -52,5 +54,5 @@ else
     /d:sonar.pullrequest.base="master"
 fi
 
-# dotnet test -v n TCSonarCube.sln --filter 'FullyQualifiedName~Test.Unit' -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "testresults"
-# dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
+dotnet test -v n TCSonarCube.sln --filter 'FullyQualifiedName~Test.Unit' -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "testresults"
+dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
