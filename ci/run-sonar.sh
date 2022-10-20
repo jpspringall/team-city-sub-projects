@@ -38,7 +38,6 @@ if [ -z "$number" ]; then
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
-    /d:sonar.pullrequest.key="$number" \
     /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
 else
     echo "Iz NOT empty"
