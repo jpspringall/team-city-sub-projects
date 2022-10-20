@@ -10,7 +10,7 @@ do
         u) user=${OPTARG};; 
         p) password=${OPTARG};; 
         n) number=${OPTARG};;
-        v) version=${OPTARG}
+        v) version=${OPTARG};;
         \?) echo "Invalid option: -$OPTARG" >&2;; 
     esac
 done
