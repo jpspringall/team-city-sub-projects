@@ -51,7 +51,7 @@ object CommonSteps {
     fun BuildType.runSonarScript(
     ) {
         //CHANGE THIS BEFORE USING FOR REALZ"
-        val imageRepository = "emeraldsquad"
+        val imageRepository = "jpspringall"
         //CHANGE THIS BEFORE USING FOR REALZ"
         steps {
             exec {
@@ -62,7 +62,7 @@ object CommonSteps {
                 formatStderrAsError = true
                 dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
                 dockerPull = true
-                dockerImage = "${imageRepository}/sonar-scanner-net" //CHECK IMAGE NAME FOR REALZ
+                dockerImage = "${imageRepository}/dotnet-sonar-scanner:5.8.0" //CHECK IMAGE NAME FOR REALZ
             }
         }
     }
