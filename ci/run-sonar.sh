@@ -48,8 +48,8 @@ else
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
-    /d:sonar.pullrequest.key="$number" \
     /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
+    /d:sonar.pullrequest.key="$number" \
     /d:sonar.pullrequest.branch="pull/$number" \
     /d:sonar.pullrequest.base="master"
 fi
