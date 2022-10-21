@@ -13,14 +13,14 @@ do
         u) user=${OPTARG};; 
         p) password=${OPTARG};; 
         n) number=${OPTARG};;
-        v) version=${OPTARG};;
+        v) version="2.0.${OPTARG}";;
         \?) echo "Invalid option: -$OPTARG" >&2;; 
     esac
 done
 
 echo "Server $server";
 echo "User $user";
-echo "Password $password"
+#echo "Password $password"
 echo "Number $number"
 echo "Version $version"
 
@@ -34,7 +34,7 @@ if [ -z "$number" ]; then
     dotnet-sonarscanner begin \
     /k:"$projectKey" \
     /n:"$projectName" \
-    /v:"%build.vcs.number%" \
+    /v:"$version" \
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
@@ -44,6 +44,7 @@ else
     dotnet-sonarscanner begin \
     /k:"$projectKey" \
     /n:"$projectName" \
+    /v:"$version" \
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
