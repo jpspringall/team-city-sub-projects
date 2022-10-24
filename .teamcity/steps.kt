@@ -71,6 +71,7 @@ object CommonSteps {
     ) {
         params {
             param("teamcity.pullRequest.number", "")
+            param("teamcity.git.fetchAllHeads", "true")
         }
     }
 }
