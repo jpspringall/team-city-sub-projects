@@ -30,7 +30,6 @@ echo "Version $version"
 
 #If no PR number provided
 if [ -z "$number" ]; then
-    echo "Iz empty"
     dotnet-sonarscanner begin \
     /k:"$projectKey" \
     /n:"$projectName" \
@@ -40,7 +39,6 @@ if [ -z "$number" ]; then
     /d:sonar.password="$password" \
     /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
 else
-    echo "Iz NOT empty"
     dotnet-sonarscanner begin \
     /k:"$projectKey" \
     /n:"$projectName" \
