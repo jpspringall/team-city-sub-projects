@@ -44,7 +44,7 @@ else
     /k:"$projectKey" \
     /n:"$projectName" \
     /v:"$version" \
-    /d:sonar.verbose="true" \/
+    /d:sonar.verbose="true" \
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
