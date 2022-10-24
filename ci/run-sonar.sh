@@ -20,7 +20,6 @@ done
 
 echo "Server $server";
 echo "User $user";
-#echo "Password $password"
 echo "Number $number"
 echo "Version $version"
 
