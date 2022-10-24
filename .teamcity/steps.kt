@@ -7,10 +7,10 @@ object CommonSteps {
 
     ) {
         steps {
-            nuGetInstaller {
-                toolPath = "%teamcity.tool.NuGet.CommandLine.DEFAULT%"
-                projects = "TCSonarCube.sln"
-            }
+//            nuGetInstaller {
+//                toolPath = "%teamcity.tool.NuGet.CommandLine.DEFAULT%"
+//                projects = "TCSonarCube.sln"
+//            }
             dotnetBuild {
                 name = "Build Solution"
                 projects = "TCSonarCube.sln"
