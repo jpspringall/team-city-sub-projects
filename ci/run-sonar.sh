@@ -54,5 +54,6 @@ else
     /d:sonar.pullrequest.base="master"
 fi
 
-dotnet test -v n TCSonarCube.sln --filter 'FullyQualifiedName~Test.Unit' -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "testresults"
+dotnet build TCSonarCube.sln
+dotnet test TCSonarCube -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "testresults"
 dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
