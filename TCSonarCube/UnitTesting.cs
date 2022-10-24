@@ -15,7 +15,14 @@ namespace TCSonarCube
         public void Fail()
         {
             42.Should().Be(42);
-
+            42.Should().Be(42);
+            42.Should().Be(42);
+            42.Should().Be(42);
+            42.Should().Be(42);
+            42.Should().Be(42);
+            42.Should().Be(42);
+            42.Should().Be(42);
+            42.Should().Be(42);
         }
 
         [Fact]
@@ -31,6 +38,7 @@ namespace TCSonarCube
         [Fact]
         public void WebApp()
         {
+            3.Should().Be(new WebApplicationForTesting.Controllers.WeatherForecastController().BuggyCodeBranch());
             3.Should().Be(new WebApplicationForTesting.Controllers.WeatherForecastController().BuggyCodeBranch());
         }
     }

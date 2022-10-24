@@ -44,6 +44,7 @@ namespace WebApplicationForTesting.Controllers
         public int DuplicateCodeBranch2()
         {
             return new ClassLibraryForTesting.TestClass().DuplicateCodeBranch();
+            return new ClassLibraryForTesting.TestClass().DuplicateCodeBranch();
         }
     }
 }
