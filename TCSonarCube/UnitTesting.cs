@@ -34,5 +34,12 @@ namespace TCSonarCube
             target = -num;  // Noncompliant; target = -3. Is that really what's meant?
             target = +num; // Noncompliant; target = 3
         }
+
+        [Fact]
+        public void WebApp()
+        {
+            3.Should().Be(new WebApplicationForTesting.Controllers.WeatherForecastController().BuggyCodeBranch());
+            3.Should().Be(new WebApplicationForTesting.Controllers.WeatherForecastController().BuggyCodeBranch());
+        }
     }
 }

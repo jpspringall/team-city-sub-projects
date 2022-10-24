@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCSonarCube", "TCSonarCube\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibraryForTesting", "ClassLibraryForTesting\ClassLibraryForTesting.csproj", "{39C35200-447E-4F5A-8D12-D242805A9E97}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationForTesting", "WebApplicationForTesting\WebApplicationForTesting.csproj", "{C72518BD-A8A1-4F12-8BA0-31ACEBB39AA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{39C35200-447E-4F5A-8D12-D242805A9E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39C35200-447E-4F5A-8D12-D242805A9E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39C35200-447E-4F5A-8D12-D242805A9E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C72518BD-A8A1-4F12-8BA0-31ACEBB39AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C72518BD-A8A1-4F12-8BA0-31ACEBB39AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C72518BD-A8A1-4F12-8BA0-31ACEBB39AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C72518BD-A8A1-4F12-8BA0-31ACEBB39AA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
