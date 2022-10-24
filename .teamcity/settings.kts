@@ -48,6 +48,8 @@ object Build : BuildType({
 
     vcs {
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
+        cleanCheckout = true
+        excludeDefaultBranchChanges = true
     }
 
     createParameters()
@@ -72,6 +74,8 @@ object PullRequestBuild : BuildType({
 
     vcs {
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
+        cleanCheckout = true
+        excludeDefaultBranchChanges = true
     }
 
     createParameters()
@@ -114,6 +118,8 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster : GitVcsRoot({
     name = "Master Build"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
+    agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
+    checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
     authMethod = password {
         userName = "jpspringall"
         password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
@@ -127,6 +133,8 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     branch = "refs/heads/master"
     branchSpec = "refs/pull/*/merge"
     //branchSpec = "refs/pull/*/head"
+    agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
+    checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
     authMethod = password {
         userName = "jpspringall"
         password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
