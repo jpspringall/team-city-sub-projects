@@ -38,7 +38,7 @@ version = "2022.04"
 
 project {
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
-    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
+    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
     buildType(Build)
     buildType(PullRequestBuild)
 }
@@ -71,7 +71,7 @@ object PullRequestBuild : BuildType({
     name = "Pull Request Build"
 
     vcs {
-        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1)
+        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
     }
 
     createParameters()
@@ -89,7 +89,7 @@ object PullRequestBuild : BuildType({
 
     features {
         commitStatusPublisher {
-            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1.id}"
+            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR.id}"
             publisher = github {
                 githubUrl = "https://api.github.com"
                 authType = personalToken {
@@ -98,7 +98,7 @@ object PullRequestBuild : BuildType({
             }
         }
         pullRequests {
-            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1.id}"
+            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR.id}"
             provider = github {
                 authType = token {
                     token = "credentialsJSON:22719b77-2b1e-4b10-be8b-6cab49c7c069"
@@ -121,7 +121,7 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster : GitVcsRoot({
     param("oauthProviderId", "PROJECT_EXT_2")
 })
 
-object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster1 : GitVcsRoot({
+object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     name = "Pull Request Build"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
