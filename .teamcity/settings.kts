@@ -130,10 +130,10 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster : GitVcsRoot({
 object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     name = "Pull Request Build"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
-    branch = "refs/heads/master"
+    branch = "refs/heads/donotrun"
     branchSpec = """
         +:refs/pull/*/merge
-        -:refs/heads/master
+        -:refs/*/master
     """.trimIndent()
     //branchSpec = "refs/pull/*/head"
     agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
