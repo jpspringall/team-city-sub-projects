@@ -4,6 +4,7 @@ import CommonSteps.createParameters
 import CommonSteps.printPullRequestNumber
 import CommonSteps.runSonarScript
 import jetbrains.buildServer.configs.kotlin.BuildType
+import jetbrains.buildServer.configs.kotlin.Project
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
@@ -36,7 +37,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 
 version = "2022.04"
 
-project {
+var project = Project {
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
     buildType(Build)
@@ -76,7 +77,6 @@ object PullRequestBuild : BuildType({
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
         cleanCheckout = true
         excludeDefaultBranchChanges = true
-        branchFilter = "+:refs/pull/*/merge"
     }
 
     createParameters()
@@ -144,3 +144,9 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     }
     param("oauthProviderId", "PROJECT_EXT_2")
 })
+
+//if ("%git.branch.specification%".isNotEmpty()) {
+//    project.buildTypes.first().vcs.branchFilter = "%git.branch.specification%"
+//}
+
+project(project)
