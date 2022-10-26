@@ -83,6 +83,9 @@ object PullRequestBuild : BuildType({
         excludeDefaultBranchChanges = true
     }
 
+    params {
+        param("git.branch.specification", "+:refs/pull/*/merge")
+    }
     createParameters()
 
     printPullRequestNumber()
@@ -136,9 +139,7 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     name = "Pull Request Build"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
-    branchSpec = """
-        +:refs/pull/*/merge
-    """.trimIndent()
+    branchSpec = "%git.branch.specification%"
     //branchSpec = "refs/pull/*/head"
     agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
     checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
