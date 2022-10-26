@@ -149,8 +149,13 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     param("oauthProviderId", "PROJECT_EXT_2")
 })
 
-if ("%git.branch.specification%".isNotEmpty()) {
-    project.buildTypes.first().vcs.branchFilter = "%git.branch.specification%"
+for (bt : BuildType in project.buildTypes ) {
+    val gitSpec = bt.params.findRawParam("git.branch.specification")
+
+    if (gitSpec != null && gitSpec.value.isNotBlank()) {
+        bt.vcs.branchFilter = gitSpec.value
+
+    }
 }
 
 project(project)
