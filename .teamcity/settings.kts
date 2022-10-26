@@ -53,6 +53,10 @@ object Build : BuildType({
         excludeDefaultBranchChanges = true
     }
 
+    params {
+        param("git.branch.specification", "")
+    }
+
     createParameters()
 
     printPullRequestNumber()
