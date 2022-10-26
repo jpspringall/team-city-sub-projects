@@ -76,6 +76,7 @@ object PullRequestBuild : BuildType({
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
         cleanCheckout = true
         excludeDefaultBranchChanges = true
+        branchFilter = "+:refs/pull/*/merge"
     }
 
     createParameters()
@@ -133,7 +134,6 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     branch = "refs/heads/master"
     branchSpec = """
         +:refs/pull/*/merge
-        -:refs/heads/master
     """.trimIndent()
     //branchSpec = "refs/pull/*/head"
     agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
