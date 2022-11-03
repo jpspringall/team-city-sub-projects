@@ -4,6 +4,7 @@ import CommonSteps.createParameters
 import CommonSteps.printPullRequestNumber
 import CommonSteps.runSonarScript
 import jetbrains.buildServer.configs.kotlin.BuildType
+import jetbrains.buildServer.configs.kotlin.Project
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
@@ -36,7 +37,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 
 version = "2022.04"
 
-project {
+var project = Project {
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
     buildType(Build)
@@ -50,6 +51,10 @@ object Build : BuildType({
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
         cleanCheckout = true
         excludeDefaultBranchChanges = true
+    }
+
+    params {
+        param("git.branch.specification", "")
     }
 
     createParameters()
@@ -78,6 +83,9 @@ object PullRequestBuild : BuildType({
         excludeDefaultBranchChanges = true
     }
 
+    params {
+        param("git.branch.specification", "+:refs/pull/*/merge")
+    }
     createParameters()
 
     printPullRequestNumber()
@@ -131,7 +139,7 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     name = "Pull Request Build"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
-    branchSpec = "refs/pull/*/merge"
+    branchSpec = "%git.branch.specification%"
     //branchSpec = "refs/pull/*/head"
     agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
     checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
@@ -141,3 +149,14 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     }
     param("oauthProviderId", "PROJECT_EXT_2")
 })
+
+for (bt : BuildType in project.buildTypes ) {
+    val gitSpec = bt.params.findRawParam("git.branch.specification")
+
+    if (gitSpec != null && gitSpec.value.isNotBlank()) {
+        bt.vcs.branchFilter = gitSpec.value
+
+    }
+}
+
+project(project)
