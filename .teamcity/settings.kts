@@ -150,13 +150,16 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     param("oauthProviderId", "PROJECT_EXT_2")
 })
 
-//for (bt : BuildType in project.buildTypes ) {
-//    val gitSpec = bt.params.findRawParam("git.branch.specification")
-//
-//    if (gitSpec != null && gitSpec.value.isNotBlank()) {
-//        bt.vcs.branchFilter = gitSpec.value
-//
-//    }
-//}
+for (bt : BuildType in project.buildTypes ) {
+    val gitSpec = bt.params.findRawParam("git.branch.specification")
+
+    if (gitSpec != null && gitSpec.value.isNotBlank()) {
+        bt.vcs.branchFilter = """
+            +:*
+            -:refs/head/master
+        """.trimIndent()
+
+    }
+}
 
 project(project)
