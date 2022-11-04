@@ -156,7 +156,7 @@ for (bt : BuildType in project.buildTypes ) {
     if (gitSpec != null && gitSpec.value.isNotBlank()) {
         bt.vcs.branchFilter = """
             +:*
-            -:refs/head/master
+            -:<default>
         """.trimIndent()
 
     }
