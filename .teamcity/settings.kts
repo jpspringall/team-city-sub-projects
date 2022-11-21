@@ -152,13 +152,11 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
 
 for (bt : BuildType in project.buildTypes ) {
     val gitSpec = bt.params.findRawParam("git.branch.specification")
-
     if (gitSpec != null && gitSpec.value.isNotBlank()) {
         bt.vcs.branchFilter = """
             +:*
             -:<default>
         """.trimIndent()
-
     }
 }
 
