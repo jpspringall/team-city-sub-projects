@@ -20,14 +20,26 @@ object CommonSteps {
                     "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%"
                 )
             }
-            dotnetTest {
-                name = "Test Solution"
-                projects = "TCSonarCube.sln"
-                sdk = "6"
-                param(
-                    "dotNetCoverage.dotCover.home.path",
-                    "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%"
-                )
+//            dotnetTest {
+//                name = "Test Solution"
+//                projects = "TCSonarCube.sln"
+//                sdk = "6"
+//                param(
+//                    "dotNetCoverage.dotCover.home.path",
+//                    "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%"
+//                )
+//            }
+            script {
+                name = "Test Solution In A Container"
+                workingDir = "project"
+                scriptContent = "dotnet test TCSonarCube.sln -r /src/results --logger 'trx;logfilename=testresults.trx' --nologo"
+                dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
+                dockerImage = "mcr.microsoft.com/dotnet/sdk:6.0"
+                dockerRunParameters = """
+                    --env ASPNETCORE_ENVIRONMENT=Build
+                    -v %system.teamcity.build.checkoutDir%:/src/results
+                    -v /var/run/docker.sock:/var/run/docker.sock
+                """.trimIndent()
             }
         }
     }
