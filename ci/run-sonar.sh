@@ -24,7 +24,7 @@ echo "Number $number"
 echo "Version $version"
 
 #Not needed for now
-#cd project
+cd project
 
 
 #If no PR number provided
