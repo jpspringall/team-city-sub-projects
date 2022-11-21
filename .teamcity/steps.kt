@@ -39,7 +39,7 @@ object CommonSteps {
                 dockerImage = "mcr.microsoft.com/dotnet/sdk:6.0"
                 dockerRunParameters = """
                     --env ASPNETCORE_ENVIRONMENT=Build
-                    -v %system.teamcity.build.checkoutDir%:/src/results
+                    -v %system.teamcity.build.checkoutDir%/test-results:/src/results
                     -v /var/run/docker.sock:/var/run/docker.sock
                 """.trimIndent()
             }
