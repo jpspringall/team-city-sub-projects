@@ -13,6 +13,7 @@ object CommonSteps {
 //            }
             dotnetBuild {
                 name = "Build Solution"
+                workingDir = "project"
                 projects = "TCSonarCube.sln"
                 sdk = "6"
                 param(
@@ -22,6 +23,7 @@ object CommonSteps {
             }
 //            dotnetTest {
 //                name = "Test Solution"
+//                workingDir = "project"
 //                projects = "TCSonarCube.sln"
 //                sdk = "6"
 //                param(
