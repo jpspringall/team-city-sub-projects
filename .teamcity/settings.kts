@@ -5,9 +5,7 @@ import CommonSteps.printPullRequestNumber
 import CommonSteps.runSonarScript
 import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.Project
-import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
-import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
-import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
+import jetbrains.buildServer.configs.kotlin.buildFeatures.*
 import jetbrains.buildServer.configs.kotlin.project
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
@@ -71,6 +69,11 @@ object Build : BuildType({
     }
 
     features {
+        xmlReport {
+            reportType = XmlReport.XmlReportType.TRX
+            rules = "%system.teamcity.build.checkoutDir%/test-results/**/*.trx"
+            verbose = true
+        }
     }
 })
 
@@ -119,6 +122,12 @@ object PullRequestBuild : BuildType({
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
+        xmlReport {
+            reportType = XmlReport.XmlReportType.TRX
+            rules = "%system.teamcity.build.checkoutDir%/test-results/**/*.trx"
+            verbose = true
+        }
+
     }
 })
 
