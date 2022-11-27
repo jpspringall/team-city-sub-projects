@@ -160,7 +160,7 @@ for (bt : BuildType in project.buildTypes ) {
             -:<default>
         """.trimIndent()
     }
-    if (bt.name == "Pull Request Build")
+    if (bt.name == "Pull Request Build" || bt.name == "Master Build")
     {
         bt.features.add {  xmlReport {
             reportType = XmlReport.XmlReportType.TRX
