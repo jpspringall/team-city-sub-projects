@@ -157,16 +157,16 @@ for (bt : BuildType in project.buildTypes ) {
             -:<default>
         """.trimIndent()
     }
-//    if (bt.name == "Pull Request Build" || bt.name == "Master Build") {
-//        bt.features.add {
-//            feature {
-//                type = "xml-report-plugin"
-//                param("verbose", "true")
-//                param("xmlReportParsing.reportType", "trx")
-//                param("xmlReportParsing.reportDirs","%system.teamcity.build.checkoutDir%/test-results/**/*.trx")
-//            }
-//        }
-//    }
+    if (bt.name == "Pull Request Build" || bt.name == "Master Build") {
+        bt.features.add {
+            feature {
+                type = "xml-report-plugin"
+                param("verbose", "true")
+                param("xmlReportParsing.reportType", "trx")
+                param("xmlReportParsing.reportDirs","%system.teamcity.build.checkoutDir%/test-results/**/*.trx")
+            }
+        }
+    }
 //    if (bt.name == "Pull Request Build" || bt.name == "Master Build")
 //    {
 //        bt.features.add {  xmlReport {
