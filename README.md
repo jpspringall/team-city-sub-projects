@@ -1,3 +1,3 @@
 # team-city-sonar-cube
 
-test tab
+xml-loose

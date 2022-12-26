@@ -1,6 +1,10 @@
 
 import jetbrains.buildServer.configs.kotlin.BuildType
-import jetbrains.buildServer.configs.kotlin.buildSteps.*
+import jetbrains.buildServer.configs.kotlin.buildSteps.ExecBuildStep
+import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
+import jetbrains.buildServer.configs.kotlin.buildSteps.dotnetBuild
+import jetbrains.buildServer.configs.kotlin.buildSteps.exec
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 
 object CommonSteps {
     fun BuildType.buildAndTest(
@@ -33,6 +37,7 @@ object CommonSteps {
 //            }
             script {
                 name = "Test Solution In A Container"
+                enabled = false
                 workingDir = "project"
                 scriptContent = "dotnet test TCSonarCube.sln -r /src/results --logger 'trx;logfilename=testresults.trx' --nologo"
                 dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
@@ -69,7 +74,6 @@ object CommonSteps {
         //CHANGE THIS BEFORE USING FOR REALZ"
         steps {
             exec {
-                enabled = false
                 name = "Run Sonar Script"
                 path = "ci/run-sonar.sh"
                 arguments =
@@ -78,6 +82,9 @@ object CommonSteps {
                 dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
                 dockerPull = true
                 dockerImage = "${imageRepository}/dotnet-sonar-scanner:5.8.0" //CHECK IMAGE NAME FOR REALZ
+                dockerRunParameters = """
+                    -v %system.teamcity.build.checkoutDir%/test-results:/test-results
+                """.trimIndent()
             }
         }
     }
