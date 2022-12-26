@@ -163,8 +163,8 @@ for (bt : BuildType in project.buildTypes ) {
             feature {
                 type = "xml-report-plugin"
                 param("verbose", "true")
-                param("xmlReportParsing.reportType", "JUNIT")
-                param("xmlReportParsing.reportDirs","%system.teamcity.build.checkoutDir%/test-results/**/*.xml")
+                param("xmlReportParsing.reportType", "trx")
+                param("xmlReportParsing.reportDirs","%system.teamcity.build.checkoutDir%/test-results/**/*.trx")
             }
         }
     }
