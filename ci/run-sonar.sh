@@ -37,7 +37,7 @@ if [ -z "$number" ]; then
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
-    /d:sonar.cs.opencover.reportsPaths="/**/coverage.opencover.xml"
+    /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
 else
     dotnet-sonarscanner begin \
     /k:"$projectKey" \
@@ -47,11 +47,12 @@ else
     /d:sonar.host.url="$server" \
     /d:sonar.login="$user" \
     /d:sonar.password="$password" \
-    /d:sonar.cs.opencover.reportsPaths="/**/coverage.opencover.xml" \
+    /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
     /d:sonar.pullrequest.key="$number" \
     /d:sonar.pullrequest.branch="pull/$number" \
     /d:sonar.pullrequest.base="master"
 fi
 
-dotnet test TCSonarCube.sln -v:n -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "/test-results"
+#https://stackoverflow.com/questions/69368514/how-can-i-properly-generate-both-trx-files-and-code-coverage-results-with-one-ca
+dotnet test TCSonarCube.sln -v:n -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "/test-results" --logger 'trx;logfilename=testresults.trx'
 dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
