@@ -1,3 +1,17 @@
+config_variables:
+  TC_SONAR_QUBE_USE:
+    default: '0'
+  TC_SONAR_QUBE_SERVER:
+    default: 'NO_SONAR_SERVER_PROVIDED'
+  TC_SONAR_QUBE_USER:
+    default: 'NO_SONAR_USER_PROVIDED'
+  TC_SONAR_QUBE_PASSWORD:
+    default: 'NO_SONAR_PASSWORD_PROVIDED'
+  TC_SONAR_QUBE_NUMBER:
+    default: 'NO_SONAR_NUMBER_PROVIDED'
+  TC_SONAR_QUBE_VERSION:
+    default: 'NO_SONAR_VERSION_PROVIDED'
+
 containers:
   build-env:
     build_directory: .
@@ -13,12 +27,13 @@ tasks:
     description: Run Test
     run:
       container: build-env
+      entrypoint: /bin/bash
       command: bash ./ci/run-sonar-with-batect.sh
       environment:
-        TC_SONAR_QUBE_USE: ${TC_SONAR_QUBE_USE:-}
-        TC_SONAR_QUBE_SERVER: ${TC_SONAR_QUBE_SERVER:-}
-        TC_SONAR_QUBE_USER: ${TC_SONAR_QUBE_USER:-}
-        TC_SONAR_QUBE_PASSWORD: ${TC_SONAR_QUBE_PASSWORD:-}
-        TC_SONAR_QUBE_NUMBER: ${TC_SONAR_QUBE_NUMBER:-}
-        TC_SONAR_QUBE_VERSION: ${TC_SONAR_QUBE_VERSION:-}
+        TC_SONAR_QUBE_USE: <{TC_SONAR_QUBE_USE}
+        TC_SONAR_QUBE_SERVER: <{TC_SONAR_QUBE_SERVER}
+        TC_SONAR_QUBE_USER: <{TC_SONAR_QUBE_USER}
+        TC_SONAR_QUBE_PASSWORD: <{TC_SONAR_QUBE_PASSWORD}
+        TC_SONAR_QUBE_NUMBER: <{TC_SONAR_QUBE_NUMBER}
+        TC_SONAR_QUBE_VERSION: <{TC_SONAR_QUBE_VERSION}
       #command: dotnet test project/TCSonarCube.sln -v:n -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "/test-results" --logger 'trx;logfilename=testresults.trx'

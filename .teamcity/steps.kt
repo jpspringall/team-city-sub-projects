@@ -55,13 +55,14 @@ object CommonSteps {
                 workingDir = "./"
                 scriptContent = """
                 #!/bin/bash
-                export TC_SONAR_QUBE_USE=1
-                export TC_SONAR_QUBE_SERVER=%env.sonar_server%
-                export TC_SONAR_QUBE_USER=%env.sonar_user%
-                export TC_SONAR_QUBE_PASSWORD=%env.sonar_password%
-                export TC_SONAR_QUBE_NUMBER=%teamcity.pullRequest.number%
-                export TC_SONAR_QUBE_VERSION=%build.counter%
-                ./batect run-test
+                ./batect \
+                --config-var TC_SONAR_QUBE_USE=1 \
+                --config-var TC_SONAR_QUBE_SERVER=""%env.sonar_server%"" \
+                --config-var TC_SONAR_QUBE_USER=""%env.sonar_user%"" \
+                --config-var TC_SONAR_QUBE_PASSWORD=""%env.sonar_password%"" \
+                --config-var TC_SONAR_QUBE_NUMBER=""%teamcity.pullRequest.number%"" \
+                --config-var TC_SONAR_QUBE_VERSION=""%build.counter%"" \
+                run-test
                 """.trimIndent()
             }
         }
