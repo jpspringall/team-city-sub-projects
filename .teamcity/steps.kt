@@ -58,9 +58,18 @@ object CommonSteps {
                 #!/bin/bash
                 chmod +x ./batect
                 export BATECT_ENABLE_TELEMETRY=false
+                pullRequestNumber="NOT_SET"
+                if [ -n "%teamcity.pullRequest.number%" ]; then
+                    pullRequestNumber="%teamcity.pullRequest.number%"
+                fi
                 ./batect \
                 --config-var TC_SONAR_QUBE_USE="1" \
                 --config-var TC_SONAR_QUBE_SERVER=""%env.sonar_server%"" \
+                --config-var TC_SONAR_QUBE_SERVER=""%env.sonar_server%"" \
+                --config-var TC_SONAR_QUBE_USER=""%env.sonar_user%"" \
+                --config-var TC_SONAR_QUBE_PASSWORD=""%env.sonar_password%"" \
+                --config-var TC_SONAR_QUBE_VERSION=""%build.counter%"" \
+                --config-var TC_SONAR_QUBE_NUMBER=""%%pullRequestNumber%%"" \
                 run-tests
                 """.trimIndent()
             }
