@@ -29,9 +29,10 @@ echo "Version $version"
 #Not needed for now
 cd project
 
-
+if ["$sonarUse" == "1"]; then
 # #If no PR number provided
-# if [ -z "$number" ]; then
+# if [ -z "$number" || "$number" == "NOT_SET" ]; then
+#     echo "not set"
 #     dotnet-sonarscanner begin \
 #     /k:"$projectKey" \
 #     /n:"$projectName" \
@@ -55,9 +56,12 @@ cd project
 #     /d:sonar.pullrequest.branch="pull/$number" \
 #     /d:sonar.pullrequest.base="master"
 # fi
+fi
 
 # #https://stackoverflow.com/questions/69368514/how-can-i-properly-generate-both-trx-files-and-code-coverage-results-with-one-ca
-# dotnet test TCSonarCube.sln -v:n -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "/test-results" --logger 'trx;logfilename=testresults.trx'
-# dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
-
 dotnet test TCSonarCube.sln -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "/test-results" --logger 'trx;logfilename=testresults.trx'
+
+if ["$sonarUse" == "1"]; then
+    dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
+fi
+
