@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set +e
 
 echo "Running Script"
 
@@ -58,9 +58,15 @@ if [ "$sonarUse" -eq 1 ]; then
 fi
 
 # #https://stackoverflow.com/questions/69368514/how-can-i-properly-generate-both-trx-files-and-code-coverage-results-with-one-ca
-dotnet test TCSonarCube.sln -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "/test-results" --logger 'trx;logfilename=testresults.trx'
+dotnet test TCSonarCube.sln -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "/test-results" --logger 'trx;logfilename=testresults.trx' || error=true
 
 if [ "$sonarUse" -eq 1 ]; then
     dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
+fi
+
+#Fail the build if there was an error
+if [ $error ]
+then
+    exit -1
 fi
 
