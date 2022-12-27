@@ -55,7 +55,7 @@ object CommonSteps {
                 workingDir = "./"
                 scriptContent = """
                 #!/bin/bash
-                ./batect \
+                sudo ./batect \
                 --config-var TC_SONAR_QUBE_USE=1 \
                 --config-var TC_SONAR_QUBE_SERVER=""%env.sonar_server%"" \
                 --config-var TC_SONAR_QUBE_USER=""%env.sonar_user%"" \
