@@ -15,7 +15,7 @@ config_variables:
 containers:
   build-env:
     build_directory: .
-    dockerfile: .batect\sdk.6.0\Dockerfile
+    dockerfile: .batect/sdk.6.0/Dockerfile
     working_directory: /code
     volumes:
       # This is equivalent to .:/code:ro

@@ -58,7 +58,13 @@ object CommonSteps {
                 ls
                 chmod +x ./batect
                 ./batect \
+                --permanently-disable-telemetry \
                 --config-var TC_SONAR_QUBE_USE="1" \
+                --config-var TC_SONAR_QUBE_SERVER=""%env.sonar_server%"" \
+                --config-var TC_SONAR_QUBE_USER=""%env.sonar_user%"" \
+                --config-var TC_SONAR_QUBE_PASSWORD=""%env.sonar_password%"" \
+                --config-var TC_SONAR_QUBE_NUMBER=""%teamcity.pullRequest.number%"" \
+                --config-var TC_SONAR_QUBE_VERSION=""%build.counter%"" \
                 run-tests
                 """.trimIndent()
             }
