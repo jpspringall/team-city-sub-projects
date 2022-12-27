@@ -1,3 +1,3 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0
+FROM jpspringall//dotnet-sonar-scanner:5.8.0
 WORKDIR /code
 COPY . .

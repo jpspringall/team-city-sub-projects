@@ -32,7 +32,6 @@ cd project
 if [ "$sonarUse" -eq 1 ]; then
     #If no PR number provided
     if [[ $number == "NOT_SET" ]]; then
-        echo "not set"
         dotnet-sonarscanner begin \
         /k:"$projectKey" \
         /n:"$projectName" \
