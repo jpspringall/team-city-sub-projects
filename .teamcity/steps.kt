@@ -57,10 +57,7 @@ object CommonSteps {
                 scriptContent = """
                 #!/bin/bash
                 chmod +x ./batect
-                ./batect \
-                --permanently-disable-telemetry \
-                --config-var TC_SONAR_QUBE_USE="1" \
-                run-tests
+                ./batect --config-var TC_SONAR_QUBE_USE="1" run-tests
                 """.trimIndent()
             }
         }
