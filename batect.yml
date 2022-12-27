@@ -1,0 +1,24 @@
+containers:
+  build-env:
+    build_directory: .
+    dockerfile: .batect\sdk.6.0\Dockerfile
+    working_directory: /code
+    volumes:
+      # This is equivalent to .:/code:ro
+      - local: test-results
+        container: /test-results
+
+tasks:
+  run-tests:
+    description: Run Test
+    run:
+      container: build-env
+      command: bash ./ci/run-sonar-with-batect.sh
+      environment:
+        TC_SONAR_QUBE_USE: ${TC_SONAR_QUBE_USE:-}
+        TC_SONAR_QUBE_SERVER: ${TC_SONAR_QUBE_SERVER:-}
+        TC_SONAR_QUBE_USER: ${TC_SONAR_QUBE_USER:-}
+        TC_SONAR_QUBE_PASSWORD: ${TC_SONAR_QUBE_PASSWORD:-}
+        TC_SONAR_QUBE_NUMBER: ${TC_SONAR_QUBE_NUMBER:-}
+        TC_SONAR_QUBE_VERSION: ${TC_SONAR_QUBE_VERSION:-}
+      #command: dotnet test project/TCSonarCube.sln -v:n -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "/test-results" --logger 'trx;logfilename=testresults.trx'
