@@ -57,7 +57,9 @@ object CommonSteps {
                 #!/bin/bash
                 ls
                 chmod +x ./batect
-                ./batect --config-var TC_SONAR_QUBE_USE="1" run-test
+                ./batect \
+                --config-var TC_SONAR_QUBE_USE="1" \
+                run-tests
                 """.trimIndent()
             }
         }
