@@ -28,7 +28,7 @@ tasks:
     run:
       container: build-env
       entrypoint: /bin/bash
-      command: bash ./ci/run-sonar-with-batect.sh
+      command: ./ci/run-sonar-with-batect.sh
       environment:
         TC_SONAR_QUBE_USE: <{TC_SONAR_QUBE_USE}
         TC_SONAR_QUBE_SERVER: <{TC_SONAR_QUBE_SERVER}

@@ -16,6 +16,7 @@ object CommonSteps {
 //                projects = "TCSonarCube.sln"
 //            }
             dotnetBuild {
+                enabled = false
                 name = "Build Solution"
                 workingDir = "project"
                 projects = "TCSonarCube.sln"
@@ -55,7 +56,6 @@ object CommonSteps {
                 workingDir = "./"
                 scriptContent = """
                 #!/bin/bash
-                ls
                 chmod +x ./batect
                 ./batect \
                 --permanently-disable-telemetry \
