@@ -67,6 +67,6 @@ fi
 #Fail the build if there was an error
 if [ $error ]
 then
-    exit -1
+    exit 1
 fi
 
