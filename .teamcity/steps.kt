@@ -62,8 +62,7 @@ object CommonSteps {
                 export TC_SONAR_QUBE_NUMBER=%teamcity.pullRequest.number%
                 export TC_SONAR_QUBE_VERSION=%build.counter%
                 ./batect run-test
-            """.trimIndent()
-                scriptContent = ""
+                """.trimIndent()
             }
         }
     }
