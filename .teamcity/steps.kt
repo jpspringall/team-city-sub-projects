@@ -68,7 +68,7 @@ object CommonSteps {
                 --config-var TC_SONAR_QUBE_USER=""%env.sonar_user%"" \
                 --config-var TC_SONAR_QUBE_PASSWORD=""%env.sonar_password%"" \
                 --config-var TC_SONAR_QUBE_VERSION=""%build.counter%"" \
-                --config-var TC_SONAR_QUBE_NUMBER=""%%pullRequestNumber%%"" \
+                --config-var TC_SONAR_QUBE_NUMBER=pullRequestNumber \
                 run-tests
                 """.trimIndent()
             }
