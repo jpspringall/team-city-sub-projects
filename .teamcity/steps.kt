@@ -56,6 +56,7 @@ object CommonSteps {
                 workingDir = "./"
                 scriptContent = """
                 #!/bin/bash
+                chmod +x ./batect
                 export BATECT_ENABLE_TELEMETRY=false
                 pullRequestNumber="NOT_SET"
                 if [ -n "%teamcity.pullRequest.number%" ]; then
