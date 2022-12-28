@@ -61,6 +61,7 @@ fi
 set +e
 dotnet test TCSonarCube.sln -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover%2cteamcity --results-directory "/test-results" --logger 'trx;logfilename=testresults.trx' || error=true
 
+set -e
 if [ "$sonarUse" -eq 1 ]; then
     dotnet-sonarscanner end /d:sonar.login="$user" /d:sonar.password="$password"
 fi
