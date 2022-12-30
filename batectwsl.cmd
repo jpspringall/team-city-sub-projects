@@ -1,1 +1,1 @@
-wsl.exe ./batect
+wsl.exe ./batect %*
