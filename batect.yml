@@ -18,9 +18,12 @@ containers:
     dockerfile: .batect/sdk.6.0/Dockerfile
     working_directory: /code
     volumes:
-      # This is equivalent to .:/code:ro
-      - local: test-results
-        container: /test-results
+      - local: .
+        type: local
+        container: /code
+      - type: cache
+        name: nuget-cache
+        container: /root/.nuget/packages
 
 tasks:
   run-tests:
