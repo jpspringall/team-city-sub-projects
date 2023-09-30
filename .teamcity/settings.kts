@@ -45,7 +45,9 @@ var project = Project {
     buildType(PullRequestBuild)
 }
 
-var ghpToken = "credentialsJSON:4f1ab45b-e5ec-4ec6-a163-9909d1e721ec";
+var featuresPATToken = "credentialsJSON:f2dffa16-ad7a-4ee8-97dd-e0c8bfef7e63";
+var githubToken = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
+
 
 object Build : BuildType({
     name = "Master Build"
@@ -107,7 +109,7 @@ object PullRequestBuild : BuildType({
             publisher = github {
                 githubUrl = "https://api.github.com"
                 authType = personalToken {
-                    token = "credentialsJSON:3a001759-7d6f-4348-9d4d-2eb43f7b51ad"
+                    token = featuresPATToken
                 }
             }
         }
@@ -115,7 +117,7 @@ object PullRequestBuild : BuildType({
             vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR.id}"
             provider = github {
                 authType = token {
-                    token = "credentialsJSON:3a001759-7d6f-4348-9d4d-2eb43f7b51ad"
+                    token = featuresPATToken
                 }
                 filterSourceBranch = "refs/pull/*/merge"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
@@ -132,7 +134,7 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster : GitVcsRoot({
     checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
     authMethod = password {
         userName = "jpspringall"
-        password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
+        password = githubToken
     }
     param("oauthProviderId", "PROJECT_EXT_2")
 })
@@ -147,7 +149,7 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
     checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
     authMethod = password {
         userName = "jpspringall"
-        password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
+        password = githubToken
     }
     param("oauthProviderId", "PROJECT_EXT_2")
 })
