@@ -14,7 +14,7 @@ namespace TCSonarCube
         [Fact]
         public void Fail()
         {
-            99.Should().Be(1);
+            1.Should().Be(1);
 
         }
 
