@@ -40,24 +40,18 @@ version = "2023.05"
 
 var featuresPATToken = "credentialsJSON:f2dffa16-ad7a-4ee8-97dd-e0c8bfef7e63";
 var githubToken = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
-
-var pullRequestBuild = PullRequestBuild();
-var httpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster = HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster();
-var httpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR = HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR();
-var build = Build();
-
 var project = Project {
-    vcsRoot(httpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
-    vcsRoot(httpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
-    buildType(build)
-    buildType(pullRequestBuild)
+    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
+    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
+    buildType(Build)
+    buildType(PullRequestBuild)
 }
 
-inner class Build : BuildType({
+object Build : BuildType({
     name = "Master Build"
 
     vcs {
-        root(httpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
+        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
         cleanCheckout = true
         excludeDefaultBranchChanges = true
     }
@@ -82,11 +76,11 @@ inner class Build : BuildType({
     features {}
 })
 
-inner class PullRequestBuild : BuildType({
+object PullRequestBuild : BuildType({
     name = "Pull Request Build"
 
     vcs {
-        root(httpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
+        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
         cleanCheckout = true
         excludeDefaultBranchChanges = true
     }
@@ -109,7 +103,7 @@ inner class PullRequestBuild : BuildType({
 
     features {
         commitStatusPublisher {
-            vcsRootExtId = "${httpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR.id}"
+            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR.id}"
             publisher = github {
                 githubUrl = "https://api.github.com"
                 authType = personalToken {
@@ -130,7 +124,7 @@ inner class PullRequestBuild : BuildType({
     }
 })
 
-inner class HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster : GitVcsRoot({
+object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster : GitVcsRoot({
     name = "Master Build"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
