@@ -36,7 +36,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 'Debug' option is available in the context menu for the task.
 */
 
-version = "2023.05"
+version = "2022.04"
 
 var featuresPATToken = "credentialsJSON:f2dffa16-ad7a-4ee8-97dd-e0c8bfef7e63";
 var githubToken = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
