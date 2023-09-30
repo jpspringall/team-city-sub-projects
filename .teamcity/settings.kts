@@ -45,6 +45,8 @@ var project = Project {
     buildType(PullRequestBuild)
 }
 
+var ghpToken = "credentialsJSON:4f1ab45b-e5ec-4ec6-a163-9909d1e721ec";
+
 object Build : BuildType({
     name = "Master Build"
 
