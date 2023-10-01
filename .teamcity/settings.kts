@@ -36,7 +36,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 'Debug' option is available in the context menu for the task.
 */
 
-version = "2022.04"
+version = "2023.05"
 
 var project = Project {
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
@@ -108,7 +108,7 @@ object PullRequestBuild : BuildType({
             publisher = github {
                 githubUrl = "https://api.github.com"
                 authType = personalToken {
-                    token = "credentialsJSON:f2dffa16-ad7a-4ee8-97dd-e0c8bfef7e63" // This is the PAT
+                    token = "credentialsJSON:8d4d7c58-80d8-4e39-8318-56da201e50a8" // This is the PAT
                 }
             }
         }
@@ -116,7 +116,7 @@ object PullRequestBuild : BuildType({
             vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR.id}"
             provider = github {
                 authType = token {
-                    token = "credentialsJSON:f2dffa16-ad7a-4ee8-97dd-e0c8bfef7e63" // This is the PAT
+                    token = "credentialsJSON:8d4d7c58-80d8-4e39-8318-56da201e50a8" // This is the PAT
                 }
                 filterSourceBranch = "refs/pull/*/merge"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
