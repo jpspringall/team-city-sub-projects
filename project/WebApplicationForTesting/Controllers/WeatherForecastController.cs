@@ -45,5 +45,11 @@ namespace WebApplicationForTesting.Controllers
         {
             return new ClassLibraryForTesting.TestClass().DuplicateCodeBranch();
         }
+
+        [HttpGet(Name = "NoCoverage")]
+        public int NoCoverage()
+        {
+            return new ClassLibraryForTesting.TestClass().DuplicateCodeBranch();
+        }
     }
 }
