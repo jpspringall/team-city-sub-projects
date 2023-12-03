@@ -5,11 +5,10 @@ echo "Running End To End Test Script"
 
 echo $@
 
-while getopts :z:i:s:u:p:c:r:n: flag
+while getopts :i:s:u:p:c:r:n: flag
 do
     echo "Processing flag ${flag}"
     case "${flag}" in
-        z) zserver="${OPTARG}";; 
         i) isCI="${OPTARG}";;
         s) server="${OPTARG}";; 
         u) user="${OPTARG}";; 
@@ -30,7 +29,6 @@ if [ -n "$pullRequestNumber" ]; then
 fi
 
 echo "isCI $isCI";
-echo "ZServer $zserver";
 echo "Server $server";
 echo "User $user";
 echo "Password $password"
@@ -52,13 +50,13 @@ echo "Setting Batect Execute Wiyhout script "
 
 chmod +x ./batect
 
-echo "Running Batect"
+echo "Running Batect With Quotes"
 
 ./batect \
---config-var TC_SONAR_QUBE_USE=1 \
---config-var TC_SONAR_QUBE_SERVER=$server \
---config-var TC_SONAR_QUBE_USER=$user \
---config-var TC_SONAR_QUBE_PASSWORD=$password \
---config-var TC_SONAR_QUBE_VERSION=$buildCounter \
---config-var TC_SONAR_QUBE_NUMBER=$prNumber \
+--config-var TC_SONAR_QUBE_USE="1" \
+--config-var TC_SONAR_QUBE_SERVER="$server" \
+--config-var TC_SONAR_QUBE_USER="$user" \
+--config-var TC_SONAR_QUBE_PASSWORD="$password" \
+--config-var TC_SONAR_QUBE_VERSION="$buildCounter" \
+--config-var TC_SONAR_QUBE_NUMBER="$prNumber" \
 run-tests
