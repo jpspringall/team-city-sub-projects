@@ -37,6 +37,7 @@ echo "PullRequestNumber $pullRequestNumber"
 echo "BuildNumber $buildNumber"
 echo "PRNumber $prNumber"
 
+sudo apt update
 sudo apt install make
 
 make
