@@ -127,7 +127,7 @@ object CommonSteps {
     ) {
         steps {
             exec {
-                enabled = false
+                enabled = true
                 name = "Run End 2 End Tests"
                 workingDir = "./"
                 path = "./ci/run-end-2-end-test.sh"
@@ -135,7 +135,7 @@ object CommonSteps {
                 formatStderrAsError = true
             }
             script {
-                enabled = true
+                enabled = false
                 name = "Execute Make As script"
                 workingDir = "./"
                 scriptContent = """
