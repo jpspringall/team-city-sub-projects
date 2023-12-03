@@ -96,6 +96,8 @@ object PullRequestBuild : BuildType({
 
     printPullRequestNumber()
 
+    runMakeTest()
+
     buildAndTest()
 
     runSonarScript()
