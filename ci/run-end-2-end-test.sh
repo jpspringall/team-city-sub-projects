@@ -40,7 +40,7 @@ echo "PRNumber $prNumber"
 #sudo apt update
 #sudo apt install make
 
-make
+#make
 
 # ./batect \
 # --config-var BUILD_NUMBER=%build.number% \
