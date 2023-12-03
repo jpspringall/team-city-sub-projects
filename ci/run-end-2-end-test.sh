@@ -5,7 +5,7 @@ echo "Running End To End Test Script"
 
 echo $@
 
-while getopts :ci:s:u:p:bc:prn:bn: flag
+while getopts :i:s:u:p:c:r:n: flag
 do
     echo "Processing flag ${flag}"
     case "${flag}" in
