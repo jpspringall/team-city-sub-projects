@@ -113,7 +113,7 @@ object PullRequestBuild : BuildType({
             publisher = github {
                 githubUrl = "https://api.github.com"
                 authType = personalToken {
-                    token = "credentialsJSON:8d4d7c58-80d8-4e39-8318-56da201e50a8" // This is the PAT
+                    token = "credentialsJSON:0f7d1a11-dd3c-49cc-b11b-845ea7149bc7" // This is the PAT
                 }
             }
         }
@@ -121,7 +121,7 @@ object PullRequestBuild : BuildType({
             vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR.id}"
             provider = github {
                 authType = token {
-                    token = "credentialsJSON:8d4d7c58-80d8-4e39-8318-56da201e50a8" // This is the PAT
+                    token = "credentialsJSON:0f7d1a11-dd3c-49cc-b11b-845ea7149bc7" // This is the PAT
                 }
                 filterSourceBranch = "refs/pull/*/merge"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
