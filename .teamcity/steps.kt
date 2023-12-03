@@ -51,7 +51,7 @@ object CommonSteps {
             }
 
             script {
-                enabled = true
+                enabled = false
                 name = "Batect"
                 workingDir = "./"
                 scriptContent = """
