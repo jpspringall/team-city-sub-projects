@@ -16,8 +16,7 @@ do
         c) buildCounter=${OPTARG};;
         r) pullRequestNumber=${OPTARG};;
         n) buildNumber=${OPTARG};;
-        \?) echo "Invalid option: -$OPTARG" >&2
-            exit 1 
+        \?) echo "Invalid option: -$OPTARG" >&2;; 
     esac
 done
 
