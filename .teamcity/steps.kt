@@ -107,7 +107,7 @@ object CommonSteps {
         //CHANGE THIS BEFORE USING FOR REALZ"
         steps {
             exec {
-                enabled = true
+                enabled = false
                 name = "Run Sonar Script"
                 path = "ci/run-sonar.sh"
                 arguments =
@@ -135,7 +135,7 @@ object CommonSteps {
                 formatStderrAsError = true
             }
             script {
-                enabled = false
+                enabled = true
                 name = "Execute Make As script"
                 workingDir = "./"
                 scriptContent = """
