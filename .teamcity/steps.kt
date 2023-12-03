@@ -124,6 +124,7 @@ object CommonSteps {
 
     fun BuildType.runMakeTest(
     ) {
+        val pullRequestNumber = "NOT_SET"
         steps {
             script {
                 enabled = false
@@ -147,7 +148,7 @@ object CommonSteps {
                 name = "Run End 2 End Tests"
                 workingDir = "./"
                 path = "./ci/run-end-2-end-test.sh"
-                arguments = """-i "1" -s "%env.sonar_server%" -u "%env.sonar_user%" -p "%env.sonar_password%" -c "%build.counter%" -r "%teamcity.pullRequest.number%" -n "%build.number%""""
+                arguments = """-i "1" -s "%env.sonar_server%" -u "%env.sonar_user%" -p "%env.sonar_password%" -c "%build.counter%" -r ""%teamcity.pullRequest.number%"" -n "%build.number%""""
                 formatStderrAsError = true
             }
         }
