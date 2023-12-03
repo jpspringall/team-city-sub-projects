@@ -42,6 +42,10 @@ echo "PRNumber $prNumber"
 
 #make
 
+echo "Setting Batect Env "
+
+export BATECT_ENABLE_TELEMETRY=false
+
 echo "Setting Batect Execute Wiyhout script "
 
 chmod +x ./batect
@@ -49,7 +53,6 @@ chmod +x ./batect
 echo "Running Batect"
 
 ./batect \
---config-var BUILD_NUMBER="$buildNumber" \
 --config-var TC_SONAR_QUBE_USE="1" \
 --config-var TC_SONAR_QUBE_SERVER="$server" \
 --config-var TC_SONAR_QUBE_USER="$user" \
