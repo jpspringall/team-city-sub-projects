@@ -7,6 +7,7 @@ echo $@
 
 while getopts :ci:s:u:p:bc:prn:bn: flag
 do
+    echo "Processing flag ${flag}"
     case "${flag}" in
         ci) isCI=${OPTARG};;
         s) server=${OPTARG};; 
@@ -15,7 +16,8 @@ do
         bc) buildCounter=${OPTARG};;
         prn) pullRequestNumber=${OPTARG};;
         bn) buildNumber=${OPTARG};;
-        \?) echo "Invalid option: -$OPTARG" >&2;; 
+        \?) echo "Invalid option: -$OPTARG" >&2
+            exit 1 
     esac
 done
 
