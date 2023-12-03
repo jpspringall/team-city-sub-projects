@@ -37,7 +37,9 @@ echo "PullRequestNumber $pullRequestNumber"
 echo "BuildNumber $buildNumber"
 echo "PRNumber $prNumber"
 
-#make
+apt install make
+
+make
 
 # ./batect \
 # --config-var BUILD_NUMBER=%build.number% \
