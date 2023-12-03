@@ -1,6 +1,5 @@
 
 import jetbrains.buildServer.configs.kotlin.BuildType
-import jetbrains.buildServer.configs.kotlin.buildSteps.ExecBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.dotnetBuild
 import jetbrains.buildServer.configs.kotlin.buildSteps.exec
@@ -113,12 +112,12 @@ object CommonSteps {
                 arguments =
                     """-s ""%env.sonar_server%"" -u ""%env.sonar_user%"" -p ""%env.sonar_password%"" -n ""%teamcity.pullRequest.number%"" -v ""%build.counter%"""""
                 formatStderrAsError = true
-                dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
-                dockerPull = true
-                dockerImage = "${imageRepository}/dotnet-sonar-scanner:5.8.0" //CHECK IMAGE NAME FOR REALZ
-                dockerRunParameters = """
-                    -v %system.teamcity.build.checkoutDir%/test-results:/test-results
-                """.trimIndent()
+//                dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
+//                dockerPull = true
+//                dockerImage = "${imageRepository}/dotnet-sonar-scanner:5.8.0" //CHECK IMAGE NAME FOR REALZ
+//                dockerRunParameters = """
+//                    -v %system.teamcity.build.checkoutDir%/test-results:/test-results
+//                """.trimIndent()
             }
         }
     }
