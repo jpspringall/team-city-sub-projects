@@ -7,6 +7,15 @@ import jetbrains.buildServer.configs.kotlin.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 
 object CommonSteps {
+
+    fun BuildType.createParameters(
+    ) {
+        params {
+            param("teamcity.pullRequest.number", "")
+            param("teamcity.git.fetchAllHeads", "true")
+        }
+    }
+
     fun BuildType.buildAndTest(
 
     ) {
@@ -98,7 +107,7 @@ object CommonSteps {
         //CHANGE THIS BEFORE USING FOR REALZ"
         steps {
             exec {
-                enabled = false
+                enabled = true
                 name = "Run Sonar Script"
                 path = "ci/run-sonar.sh"
                 arguments =
@@ -114,17 +123,17 @@ object CommonSteps {
         }
     }
 
-    fun BuildType.createParameters(
-    ) {
-        params {
-            param("teamcity.pullRequest.number", "")
-            param("teamcity.git.fetchAllHeads", "true")
-        }
-    }
-
     fun BuildType.runMakeTest(
     ) {
         steps {
+            exec {
+                enabled = false
+                name = "Run End 2 End Tests"
+                workingDir = "./"
+                path = "./ci/run-end-2-end-test.sh"
+                arguments = "-s %env.sonar_server% -i \"1\" -u \"%env.sonar_user%\" -p \"%env.sonar_password%\" -c \"%build.counter%\" -r \"%teamcity.pullRequest.number%\" -n \"%build.number%\""
+                formatStderrAsError = true
+            }
             script {
                 enabled = false
                 name = "Execute Make As script"
@@ -141,14 +150,6 @@ object CommonSteps {
 
 
                 """.trimIndent()
-            }
-            exec {
-                enabled = true
-                name = "Run End 2 End Tests"
-                workingDir = "./"
-                path = "./ci/run-end-2-end-test.sh"
-                arguments = "-s %env.sonar_server% -i \"1\" -u \"%env.sonar_user%\" -p \"%env.sonar_password%\" -c \"%build.counter%\" -r \"%teamcity.pullRequest.number%\" -n \"%build.number%\""
-                formatStderrAsError = true
             }
         }
     }
