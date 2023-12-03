@@ -126,7 +126,7 @@ object CommonSteps {
     ) {
         steps {
             script {
-                enabled = true
+                enabled = false
                 name = "Execute Make As script"
                 workingDir = "./"
                 scriptContent = """
