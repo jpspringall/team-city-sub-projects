@@ -131,7 +131,7 @@ object CommonSteps {
                 name = "Run End 2 End Tests"
                 workingDir = "./"
                 path = "./ci/run-end-2-end-test.sh"
-                arguments = "-s %env.sonar_server% -i \"1\" -u \"%env.sonar_user%\" -p \"%env.sonar_password%\" -c \"%build.counter%\" -r \"%teamcity.pullRequest.number%\" -n \"%build.number%\""
+                arguments = "-z '%env.sonar_server%' -s %env.sonar_server% -i \"1\" -u \"%env.sonar_user%\" -p \"%env.sonar_password%\" -c \"%build.counter%\" -r \"%teamcity.pullRequest.number%\" -n \"%build.number%\""
                 formatStderrAsError = true
             }
             script {

@@ -5,10 +5,11 @@ echo "Running End To End Test Script"
 
 echo $@
 
-while getopts :i:s:u:p:c:r:n: flag
+while getopts :z:i:s:u:p:c:r:n: flag
 do
     echo "Processing flag ${flag}"
     case "${flag}" in
+        z) zserver="${OPTARG}";; 
         i) isCI="${OPTARG}";;
         s) server="${OPTARG}";; 
         u) user="${OPTARG}";; 
@@ -29,6 +30,7 @@ if [ -n "$pullRequestNumber" ]; then
 fi
 
 echo "isCI $isCI";
+echo "ZServer $zserver";
 echo "Server $server";
 echo "User $user";
 echo "Password $password"
