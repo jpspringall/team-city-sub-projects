@@ -42,12 +42,15 @@ echo "PRNumber $prNumber"
 
 #make
 
-# ./batect \
-# --config-var BUILD_NUMBER=%build.number% \
-# --config-var TC_SONAR_QUBE_USE="1" \
-# --config-var TC_SONAR_QUBE_SERVER=""%env.sonar_server%"" \
-# --config-var TC_SONAR_QUBE_USER=""%env.sonar_user%"" \
-# --config-var TC_SONAR_QUBE_PASSWORD=""%env.sonar_password%"" \
-# --config-var TC_SONAR_QUBE_VERSION=""%build.counter%"" \
-# --config-var TC_SONAR_QUBE_NUMBER=""$prNumber"" \
-# teamcity
+
+echo "Running Batect"
+
+./batect \
+--config-var BUILD_NUMBER="$buildNumber" \
+--config-var TC_SONAR_QUBE_USE="1" \
+--config-var TC_SONAR_QUBE_SERVER="$server" \
+--config-var TC_SONAR_QUBE_USER="$user" \
+--config-var TC_SONAR_QUBE_PASSWORD="$password" \
+--config-var TC_SONAR_QUBE_VERSION="$buildCounter" \
+--config-var TC_SONAR_QUBE_NUMBER="$prNumber" \
+run-tests
