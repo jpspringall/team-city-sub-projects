@@ -58,5 +58,5 @@ echo "Running Batect"
 --config-var TC_SONAR_QUBE_USER=$user \
 --config-var TC_SONAR_QUBE_PASSWORD=$password \
 --config-var TC_SONAR_QUBE_VERSION=$buildCounter \
---config-var TC_SONAR_QUBE_NUMBER=$pullRequestNumber \
+--config-var TC_SONAR_QUBE_NUMBER=$prNumber \
 run-tests
