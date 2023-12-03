@@ -121,4 +121,36 @@ object CommonSteps {
             param("teamcity.git.fetchAllHeads", "true")
         }
     }
+
+    fun BuildType.runMakeTest(
+    ) {
+        steps {
+            script {
+                enabled = true
+                name = "Execute Make As script"
+                workingDir = "./"
+                scriptContent = """
+                #!/bin/bash
+                set +e # Continue on error
+
+                echo "Running make directly"
+                make
+
+                echo "Running make via script"
+                ./ci/make-test.sh
+
+
+                """.trimIndent()
+            }
+            exec {
+                enabled = true
+                name = "Run End 2 End Tests"
+                workingDir = "./"
+                path = "./ci/run-end-2-end-test.sh"
+                arguments = """-ci ""%env.TEAMCITY_VERSION%"" -s ""%env.sonar_server%"" -u ""%env.sonar_user%"" -p ""%env.sonar_password%"" -bc ""%build.counter%"" -prn ""%teamcity.pullRequest.number%"" -bn ""%build.number%"""""
+                formatStderrAsError = true
+            }
+        }
+    }
+
 }
