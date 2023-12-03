@@ -7,14 +7,13 @@ echo $@
 
 while getopts :i:s:u:p:c:r:n: flag
 do
-    echo "Processing flag ${flag}"
     case "${flag}" in
-        i) isCI=${OPTARG};;
-        s) server=${OPTARG};; 
-        u) user=${OPTARG};; 
-        p) password=${OPTARG};; 
-        c) buildCounter=${OPTARG};;
-        r) pullRequestNumber=${OPTARG};;
+        i) isCI="${OPTARG}";;
+        s) server="${OPTARG}";; 
+        u) user="${OPTARG}";; 
+        p) password="${OPTARG}";; 
+        c) buildCounter="${OPTARG}";;
+        r) pullRequestNumber="${OPTARG}";;
         n) buildNumber=${OPTARG};;
         \?) echo "Invalid option: -$OPTARG"
             exit 1 
@@ -23,10 +22,10 @@ done
 
 mkdir -p .batect/sqlvolume
 sudo chown 10001:0 .batect/sqlvolume
-prNumber="NOT_SET"
-if [ -n "$pullRequestNumber" ]; then
-    prNumber=$pullRequestNumber
-fi
+# prNumber="NOT_SET"
+# if [ -n "$pullRequestNumber" ]; then
+#     prNumber=$pullRequestNumber
+# fi
 
 echo "isCI $isCI";
 echo "Server $server";
@@ -58,5 +57,5 @@ echo "Running Batect"
 --config-var TC_SONAR_QUBE_USER=$user \
 --config-var TC_SONAR_QUBE_PASSWORD=$password \
 --config-var TC_SONAR_QUBE_VERSION=$buildCounter \
---config-var TC_SONAR_QUBE_NUMBER=$prNumber \
+--config-var TC_SONAR_QUBE_NUMBER=$pullRequestNumber \
 run-tests
