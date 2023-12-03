@@ -9,13 +9,13 @@ while getopts :ci:s:u:p:bc:prn:bn: flag
 do
     echo "Processing flag ${flag}"
     case "${flag}" in
-        ci) isCI=${OPTARG};;
+        i) isCI=${OPTARG};;
         s) server=${OPTARG};; 
         u) user=${OPTARG};; 
         p) password=${OPTARG};; 
-        bc) buildCounter=${OPTARG};;
-        prn) pullRequestNumber=${OPTARG};;
-        bn) buildNumber=${OPTARG};;
+        c) buildCounter=${OPTARG};;
+        r) pullRequestNumber=${OPTARG};;
+        n) buildNumber=${OPTARG};;
         \?) echo "Invalid option: -$OPTARG" >&2
             exit 1 
     esac
