@@ -53,10 +53,10 @@ chmod +x ./batect
 echo "Running Batect"
 
 ./batect \
---config-var TC_SONAR_QUBE_USE="1" \
---config-var TC_SONAR_QUBE_SERVER="$server" \
---config-var TC_SONAR_QUBE_USER="$user" \
---config-var TC_SONAR_QUBE_PASSWORD="$password" \
---config-var TC_SONAR_QUBE_VERSION="$buildCounter" \
---config-var TC_SONAR_QUBE_NUMBER="$prNumber" \
+--config-var TC_SONAR_QUBE_USE=1 \
+--config-var TC_SONAR_QUBE_SERVER=$server \
+--config-var TC_SONAR_QUBE_USER=$user \
+--config-var TC_SONAR_QUBE_PASSWORD=$password \
+--config-var TC_SONAR_QUBE_VERSION=$buildCounter \
+--config-var TC_SONAR_QUBE_NUMBER=$prNumber \
 run-tests
