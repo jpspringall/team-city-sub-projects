@@ -2,6 +2,7 @@
 import CommonSteps.buildAndTest
 import CommonSteps.createParameters
 import CommonSteps.printPullRequestNumber
+import CommonSteps.runMakeTest
 import CommonSteps.runSonarScript
 import jetbrains.buildServer.configs.kotlin.BuildType
 import jetbrains.buildServer.configs.kotlin.Project
@@ -64,6 +65,8 @@ object Build : BuildType({
     createParameters()
 
     printPullRequestNumber()
+
+    runMakeTest()
 
     buildAndTest()
 
