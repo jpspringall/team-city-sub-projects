@@ -3,6 +3,8 @@ set -e # Set to fail on error
 
 echo "Running End To End Test Script"
 
+echo $@
+
 while getopts :ci:s:u:p:bc:prn:bn: flag
 do
     case "${flag}" in
@@ -33,7 +35,7 @@ echo "PullRequestNumber $pullRequestNumber"
 echo "BuildNumber $buildNumber"
 echo "PRNumber $prNumber"
 
-make
+#make
 
 # ./batect \
 # --config-var BUILD_NUMBER=%build.number% \
