@@ -42,6 +42,9 @@ echo "PRNumber $prNumber"
 
 #make
 
+echo "Setting Batect Execute"
+
+script("chmod +x ./batect")
 
 echo "Running Batect"
 
