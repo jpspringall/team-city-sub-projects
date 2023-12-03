@@ -102,7 +102,7 @@ object CommonSteps {
                 name = "Run Sonar Script"
                 path = "ci/run-sonar.sh"
                 arguments =
-                    """-s "%env.sonar_server%" -u "%env.sonar_user%" -p "%env.sonar_password%" -n "%teamcity.pullRequest.number%" -v "%build.counter%""""
+                    """-s ""%env.sonar_server%"" -u ""%env.sonar_user%"" -p ""%env.sonar_password%"" -n ""%teamcity.pullRequest.number%"" -v ""%build.counter%"""""
                 formatStderrAsError = true
                 dockerImagePlatform = ExecBuildStep.ImagePlatform.Linux
                 dockerPull = true
@@ -147,7 +147,7 @@ object CommonSteps {
                 name = "Run End 2 End Tests"
                 workingDir = "./"
                 path = "./ci/run-end-2-end-test.sh"
-                arguments = """-i ""1"" -s ""%env.sonar_server%"" -u ""%env.sonar_user%"" -p ""%env.sonar_password%"" -c ""%build.counter%"" -r ""%teamcity.pullRequest.number%"" -n ""%build.number%"""""
+                arguments = """-i "1" -s "%env.sonar_server%" -u "%env.sonar_user%" -p "%env.sonar_password%" -c "%build.counter%" -r "%teamcity.pullRequest.number%"" -n ""%build.number%""""
                 formatStderrAsError = true
             }
         }
