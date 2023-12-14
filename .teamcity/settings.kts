@@ -94,7 +94,7 @@ object PullRequestBuild : BuildType({
     }
     createParameters()
 
-    printPullRequestNumber()
+    //printPullRequestNumber()
 
     runMakeTest()
 
