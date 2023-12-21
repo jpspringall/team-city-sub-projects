@@ -1,4 +1,5 @@
 
+import CommonSteps.anotherPrintPRPullRequestNumber
 import CommonSteps.buildAndTest
 import CommonSteps.createParameters
 import CommonSteps.printMasterPullRequestNumber
@@ -96,6 +97,8 @@ object PullRequestBuild : BuildType({
     createParameters()
 
     printPRPullRequestNumber()
+
+    anotherPrintPRPullRequestNumber()
 
     runMakeTest()
 
