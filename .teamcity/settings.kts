@@ -1,7 +1,8 @@
 
 import CommonSteps.buildAndTest
 import CommonSteps.createParameters
-import CommonSteps.printPullRequestNumber
+import CommonSteps.printMasterPullRequestNumber
+import CommonSteps.printPRPullRequestNumber
 import CommonSteps.runMakeTest
 import CommonSteps.runSonarScript
 import jetbrains.buildServer.configs.kotlin.BuildType
@@ -37,7 +38,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 'Debug' option is available in the context menu for the task.
 */
 
-version = "2023.05"
+version = "2023.11"
 
 var project = Project {
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
@@ -64,7 +65,7 @@ object Build : BuildType({
 
     createParameters()
 
-    printPullRequestNumber()
+    printMasterPullRequestNumber()
 
     runMakeTest()
 
@@ -94,7 +95,7 @@ object PullRequestBuild : BuildType({
     }
     createParameters()
 
-    //printPullRequestNumber()
+    printPRPullRequestNumber()
 
     runMakeTest()
 

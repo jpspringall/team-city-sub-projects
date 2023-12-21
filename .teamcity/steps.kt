@@ -84,11 +84,27 @@ object CommonSteps {
         }
     }
 
-    fun BuildType.printPullRequestNumber(
+    fun BuildType.printMasterPullRequestNumber(
     ) {
         steps {
             script {
-                name = "Print Pull Request Number"
+                name = "Master Build Print Pull Request Number"
+                scriptContent = """
+                #!/bin/bash
+                id=%teamcity.pullRequest.number%
+                echo "Id is: ${'$'}id"
+                branch="pull/${'$'}id"
+                echo "Branch is: ${'$'}branch"
+            """.trimIndent()
+            }
+        }
+    }
+
+    fun BuildType.printPRPullRequestNumber(
+    ) {
+        steps {
+            script {
+                name = "Master Build Print Pull Request Number"
                 scriptContent = """
                 #!/bin/bash
                 id=%teamcity.pullRequest.number%
