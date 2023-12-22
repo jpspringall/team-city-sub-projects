@@ -42,8 +42,8 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2023.11"
 
 var project = Project {
-    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
-    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
+    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsSettings)
+    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
     buildType(Build)
     buildType(PullRequestBuild)
 }
@@ -55,7 +55,7 @@ object Build : BuildType({
     name = "Master Build"
 
     vcs {
-        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster)
+        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
         cleanCheckout = true
         excludeDefaultBranchChanges = true
     }
@@ -86,7 +86,7 @@ object PullRequestBuild : BuildType({
     name = "Pull Request Build"
 
     vcs {
-        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR)
+        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
         cleanCheckout = true
         excludeDefaultBranchChanges = true
     }
@@ -113,7 +113,7 @@ object PullRequestBuild : BuildType({
 
     features {
         commitStatusPublisher {
-            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR.id}"
+            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild.id}"
             publisher = github {
                 githubUrl = "https://api.github.com"
                 authType = personalToken {
@@ -122,7 +122,7 @@ object PullRequestBuild : BuildType({
             }
         }
         pullRequests {
-            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR.id}"
+            vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild.id}"
             provider = github {
                 authType = token {
                     token = "credentialsJSON:0f7d1a11-dd3c-49cc-b11b-845ea7149bc7" // This is the PAT
@@ -134,8 +134,8 @@ object PullRequestBuild : BuildType({
     }
 })
 
-object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster : GitVcsRoot({
-    name = "Master Build"
+object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsSettings : GitVcsRoot({
+    name = "Settings VCS Root"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
     agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
@@ -147,8 +147,8 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsMaster : GitVcsRoot({
     param("oauthProviderId", "PROJECT_EXT_2")
 })
 
-object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsPR : GitVcsRoot({
-    name = "Pull Request Build"
+object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild : GitVcsRoot({
+    name = "Build VCS Root"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
     branchSpec = "%git.branch.specification%"
