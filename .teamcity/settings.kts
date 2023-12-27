@@ -1,7 +1,9 @@
 
+import CommonSteps.anotherPrintPRPullRequestNumber
 import CommonSteps.buildAndTest
 import CommonSteps.createParameters
-import CommonSteps.printPullRequestNumber
+import CommonSteps.printMasterPullRequestNumber
+import CommonSteps.printPRPullRequestNumber
 import CommonSteps.runMakeTest
 import CommonSteps.runSonarScript
 import jetbrains.buildServer.configs.kotlin.BuildType
@@ -64,7 +66,7 @@ object Build : BuildType({
 
     createParameters()
 
-    printPullRequestNumber()
+    printMasterPullRequestNumber()
 
     runMakeTest()
 
@@ -94,7 +96,9 @@ object PullRequestBuild : BuildType({
     }
     createParameters()
 
-    printPullRequestNumber()
+    printPRPullRequestNumber()
+
+    anotherPrintPRPullRequestNumber()
 
     runMakeTest()
 
