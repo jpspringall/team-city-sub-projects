@@ -160,7 +160,7 @@ val builds: ArrayList<BuildType> = arrayListOf()
 
 builds.add(MasterBuild)
 builds.add(PullRequestBuild)
-//builds.add(DeployBuild)
+builds.add(DeployBuild)
 
 val project = Project {
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
