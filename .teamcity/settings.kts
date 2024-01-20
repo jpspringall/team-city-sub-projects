@@ -112,13 +112,17 @@ object PullRequestBuild : BuildType({
             vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild.id}"
             publisher = github {
                 githubUrl = "https://api.github.com"
-                authType = vcsRoot()
+                authType = personalToken {
+                    token = "credentialsJSON:0f7d1a11-dd3c-49cc-b11b-845ea7149bc7" // This is the PAT
+                }
             }
         }
         pullRequests {
             vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild.id}"
             provider = github {
-                authType = vcsRoot()
+                authType = token {
+                    token = "credentialsJSON:0f7d1a11-dd3c-49cc-b11b-845ea7149bc7" // This is the PAT
+                }
                 filterSourceBranch = "refs/pull/*/merge"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
