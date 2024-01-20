@@ -47,11 +47,15 @@ val project = Project {
     buildType(MasterBuild)
     buildType(PullRequestBuild)
     buildType(DeployBuild)
+
+    buildTypesOrder = builds
 }
 
+val builds: ArrayList<BuildType> = arrayListOf()
 
-
-
+builds.add(MasterBuild)
+builds.add(PullRequestBuild)
+builds.add(DeployBuild)
 
 
 object MasterBuild : BuildType({
@@ -149,6 +153,10 @@ object DeployBuild : BuildType({
             onDependencyFailure = FailureAction.FAIL_TO_START
             onDependencyCancel = FailureAction.CANCEL
         }
+    }
+
+    params {
+        param("git.branch.specification", "")
     }
 
     createParameters()
