@@ -44,17 +44,14 @@ version = "2023.11"
 val project = Project {
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
 
-    builds.forEach {
-        buildType(it)
-    }
-    buildTypesOrder = builds
+    buildType(MasterBuild)
+    buildType(PullRequestBuild)
+    buildType(DeployBuild)
 }
 
-val builds: ArrayList<BuildType> = arrayListOf()
 
-builds.add(MasterBuild)
-builds.add(PullRequestBuild)
-builds.add(DeployBuild)
+
+
 
 
 object MasterBuild : BuildType({
