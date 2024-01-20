@@ -40,7 +40,6 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2023.11"
 
 var project = Project {
-    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsSettings)
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
     buildType(Build)
     buildType(PullRequestBuild)
@@ -113,7 +112,7 @@ object PullRequestBuild : BuildType({
             publisher = github {
                 githubUrl = "https://api.github.com"
                 authType = personalToken {
-                    token = "credentialsJSON:0f7d1a11-dd3c-49cc-b11b-845ea7149bc7" // This is the PAT
+                    token = "credentialsJSON:a75b57d5-0461-4052-b9c6-58dfd9f2ee53" // This is the PAT
                 }
             }
         }
@@ -121,26 +120,13 @@ object PullRequestBuild : BuildType({
             vcsRootExtId = "${HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild.id}"
             provider = github {
                 authType = token {
-                    token = "credentialsJSON:0f7d1a11-dd3c-49cc-b11b-845ea7149bc7" // This is the PAT
+                    token = "credentialsJSON:a75b57d5-0461-4052-b9c6-58dfd9f2ee53" // This is the PAT
                 }
                 filterSourceBranch = "refs/pull/*/merge"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
             }
         }
     }
-})
-
-object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsSettings : GitVcsRoot({
-    name = "Settings VCS Root"
-    url = "https://github.com/jpspringall/team-city-sonar-cube"
-    branch = "refs/heads/master"
-    agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
-    checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
-    authMethod = password {
-        userName = "jpspringall"
-        password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
-    }
-    param("oauthProviderId", "PROJECT_EXT_2")
 })
 
 object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild : GitVcsRoot({
@@ -155,7 +141,6 @@ object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild : GitVcsRoot({
         userName = "jpspringall"
         password = "credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51"
     }
-    param("oauthProviderId", "PROJECT_EXT_2")
 })
 
 for (bt : BuildType in project.buildTypes ) {

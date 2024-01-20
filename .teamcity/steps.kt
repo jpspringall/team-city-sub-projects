@@ -88,7 +88,7 @@ object CommonSteps {
     ) {
         steps {
             script {
-                name = "Print Pull Request Number"
+                name = "Print Pull Request Number teamcity-sonar"
                 scriptContent = """
                 #!/bin/bash
                 id=%teamcity.pullRequest.number%
