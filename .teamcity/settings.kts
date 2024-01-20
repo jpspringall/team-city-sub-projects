@@ -41,16 +41,6 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 
 version = "2023.11"
 
-val project = Project {
-    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
-
-    buildType(MasterBuild)
-    buildType(PullRequestBuild)
-    buildType(DeployBuild)
-
-    //buildTypesOrder = builds
-}
-
 object MasterBuild : BuildType({
     name = "Master Build"
 
@@ -141,6 +131,8 @@ object DeployBuild : BuildType({
         excludeDefaultBranchChanges = true
     }
 
+    buildNumberPattern = MasterBuild.depParamRefs.buildNumber.toString()
+
     dependencies {
         snapshot(MasterBuild) {
             onDependencyFailure = FailureAction.FAIL_TO_START
@@ -164,18 +156,27 @@ object DeployBuild : BuildType({
     features {}
 })
 
-//val builds: ArrayList<BuildType> = arrayListOf()
-//
-//builds.add(MasterBuild)
-//builds.add(PullRequestBuild)
-//builds.add(DeployBuild)
+val builds: ArrayList<BuildType> = arrayListOf()
+
+builds.add(MasterBuild)
+builds.add(PullRequestBuild)
+builds.add(DeployBuild)
+
+val project = Project {
+    vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
+
+    buildType(MasterBuild)
+    buildType(PullRequestBuild)
+    buildType(DeployBuild)
+
+    buildTypesOrder = builds
+}
 
 object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild : GitVcsRoot({
     name = "Build VCS Root"
     url = "https://github.com/jpspringall/team-city-sonar-cube"
     branch = "refs/heads/master"
     branchSpec = "%git.branch.specification%"
-    //branchSpec = "refs/pull/*/head"
     agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
     checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
     authMethod = password {
