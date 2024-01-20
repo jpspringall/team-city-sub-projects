@@ -1,10 +1,12 @@
 
 import CommonSteps.buildAndTest
 import CommonSteps.createParameters
+import CommonSteps.printDeployNumber
 import CommonSteps.printPullRequestNumber
 import CommonSteps.runMakeTest
 import CommonSteps.runSonarScript
 import jetbrains.buildServer.configs.kotlin.BuildType
+import jetbrains.buildServer.configs.kotlin.FailureAction
 import jetbrains.buildServer.configs.kotlin.Project
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
@@ -39,16 +41,23 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 
 version = "2023.11"
 
-var project = Project {
+val project = Project {
     vcsRoot(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
-    buildType(Build)
-    buildType(PullRequestBuild)
+
+    builds.forEach {
+        buildType(it)
+    }
+    buildTypesOrder = builds
 }
 
+val builds: ArrayList<BuildType> = arrayListOf()
+
+builds.add(MasterBuild)
+builds.add(PullRequestBuild)
+builds.add(DeployBuild)
 
 
-
-object Build : BuildType({
+object MasterBuild : BuildType({
     name = "Master Build"
 
     vcs {
@@ -127,6 +136,34 @@ object PullRequestBuild : BuildType({
             }
         }
     }
+})
+
+object DeployBuild : BuildType({
+    name = "Deploy Build"
+
+    vcs {
+        root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
+        cleanCheckout = true
+        excludeDefaultBranchChanges = true
+    }
+
+    dependencies {
+        snapshot(MasterBuild) {
+            onDependencyFailure = FailureAction.FAIL_TO_START
+            onDependencyCancel = FailureAction.CANCEL
+        }
+    }
+
+    createParameters()
+
+    printDeployNumber()
+
+    triggers {
+        vcs {
+        }
+    }
+
+    features {}
 })
 
 object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild : GitVcsRoot({
