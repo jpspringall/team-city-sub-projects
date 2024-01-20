@@ -48,15 +48,8 @@ val project = Project {
     buildType(PullRequestBuild)
     buildType(DeployBuild)
 
-    buildTypesOrder = builds
+    //buildTypesOrder = builds
 }
-
-val builds: ArrayList<BuildType> = arrayListOf()
-
-builds.add(MasterBuild)
-builds.add(PullRequestBuild)
-builds.add(DeployBuild)
-
 
 object MasterBuild : BuildType({
     name = "Master Build"
@@ -170,6 +163,12 @@ object DeployBuild : BuildType({
 
     features {}
 })
+
+//val builds: ArrayList<BuildType> = arrayListOf()
+//
+//builds.add(MasterBuild)
+//builds.add(PullRequestBuild)
+//builds.add(DeployBuild)
 
 object HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild : GitVcsRoot({
     name = "Build VCS Root"
