@@ -100,6 +100,21 @@ object CommonSteps {
         }
     }
 
+    fun BuildType.printDeployNumber(
+    ) {
+        steps {
+            script {
+                name = "Print Deploy Number teamcity-sonar"
+                scriptContent = """
+                #!/bin/bash
+                echo "Running deployment"
+                counter=%build.counter%
+                echo "Counter is: ${'$'}counter"
+            """.trimIndent()
+            }
+        }
+    }
+
     fun BuildType.runSonarScript(
     ) {
         //CHANGE THIS BEFORE USING FOR REALZ"
