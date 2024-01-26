@@ -53,7 +53,7 @@ chmod +x ./batect
 echo "Running Batect With Quotes"
 
 ./batect \
---config-var TC_SONAR_QUBE_USE="0" \
+--config-var TC_SONAR_QUBE_USE="1" \
 --config-var TC_SONAR_QUBE_SERVER="$server" \
 --config-var TC_SONAR_QUBE_USER="$user" \
 --config-var TC_SONAR_QUBE_PASSWORD="$password" \
