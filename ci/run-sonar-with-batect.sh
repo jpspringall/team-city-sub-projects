@@ -3,8 +3,8 @@ set -e
 
 echo "Running Script"
 
-projectKey="SonarCubeTest"
-projectName="SonarCubeTest"
+projectKey="SonarCubeTest-New"
+projectName="SonarCubeTest-New"
 
 echo "Use E  ${TC_SONAR_QUBE_USE}";
 echo "Server E ${TC_SONAR_QUBE_SERVER}";
