@@ -40,6 +40,7 @@ if [ "$sonarUse" -eq 1 ]; then
         /d:sonar.host.url="$server" \
         /d:sonar.login="$user" \
         /d:sonar.password="$password" \
+        /d:sonar.branch.name="master" \
         /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
     else
         dotnet-sonarscanner begin \
