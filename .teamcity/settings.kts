@@ -11,7 +11,6 @@ import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.ui.add
-import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -38,7 +37,9 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2024.03"
 
 object MasterBuild : BuildType({
-    name = "Master Build"
+    val buildTypeName = "Master Build"
+    name = buildTypeName
+    RelativeId(buildTypeName.toId())
 
     vcs {
         root(DslContext.settingsRoot)
@@ -68,8 +69,10 @@ object MasterBuild : BuildType({
     features {}
 })
 
-object PullRequestBuildCha : BuildType({
-    name = "Pull Request Build Change"
+object PullRequestBuildChange : BuildType({
+    val buildTypeName = "Pull Request Build Change"
+    name = buildTypeName
+    RelativeId(buildTypeName.toId())
 
     vcs {
         root(DslContext.settingsRoot)
@@ -119,7 +122,9 @@ object PullRequestBuildCha : BuildType({
 })
 
 object DeployBuild : BuildType({
-    name = "Deploy Build"
+    val buildTypeName = "Deploy Build"
+    name = buildTypeName
+    RelativeId(buildTypeName.toId())
 
     vcs {
         root(DslContext.settingsRoot)
@@ -155,7 +160,7 @@ object DeployBuild : BuildType({
 val builds: ArrayList<BuildType> = arrayListOf()
 
 builds.add(MasterBuild)
-builds.add(PullRequestBuildCha)
+builds.add(PullRequestBuildChange)
 builds.add(DeployBuild)
 
 val project = Project {
@@ -187,14 +192,6 @@ for (bt : BuildType in project.buildTypes ) {
             }
         }
     }
-//    if (bt.name == "Pull Request Build" || bt.name == "Master Build")
-//    {
-//        bt.features.add {  xmlReport {
-//            reportType = XmlReport.XmlReportType.TRX
-//            rules = "%system.teamcity.build.checkoutDir%/test-results/**/*.trx" //Remember to match this in test output
-//            verbose = true
-//        } }
-//    }
 }
 
 project(project)
