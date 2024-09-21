@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
+  <name>Master Build</name>
+  <description />
+  <settings>
+    <options>
+      <option name="cleanBuild" value="true" />
+      <option name="excludeDefaultBranchChanges" value="true" />
+    </options>
+    <disabled-settings>
+      <setting-ref ref="RUNNER_3" />
+      <setting-ref ref="RUNNER_4" />
+      <setting-ref ref="RUNNER_5" />
+      <setting-ref ref="RUNNER_6" />
+      <setting-ref ref="RUNNER_7" />
+    </disabled-settings>
+    <parameters>
+      <param name="git.branch.specification" value="" />
+      <param name="teamcity.git.fetchAllHeads" value="true" />
+      <param name="teamcity.pullRequest.number" value="" />
+    </parameters>
+    <build-runners>
+      <runner id="RUNNER_1" name="Print Pull Request Number teamcity-sonar" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[#!/bin/bash
+id=%teamcity.pullRequest.number%
+echo "Id is: $id"
+branch="pull/$id"
+echo "Branch is: $branch"]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_2" name="Run End 2 End Tests" type="simpleRunner">
+        <parameters>
+          <param name="command.executable" value="./ci/run-end-2-end-test.sh" />
+          <param name="command.parameters" value="-s %env.sonar_server% -i &quot;1&quot; -u &quot;%env.sonar_user%&quot; -p &quot;%env.sonar_password%&quot; -c &quot;%build.counter%&quot; -r &quot;%teamcity.pullRequest.number%&quot; -n &quot;%build.number%&quot;" />
+          <param name="log.stderr.as.errors" value="true" />
+          <param name="teamcity.build.workingDir" value="./" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_3" name="Execute Make As script" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[#!/bin/bash
+set +e # Continue on error
+
+echo "Running make directly"
+make
+
+echo "Running make via script"
+./ci/make-test.sh]]></param>
+          <param name="teamcity.build.workingDir" value="./" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_4" name="Build Solution" type="dotnet">
+        <parameters>
+          <param name="command" value="build" />
+          <param name="dotNetCoverage.dotCover.home.path" value="%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%" />
+          <param name="paths" value="TCSonarCube.sln" />
+          <param name="required.sdk" value="6" />
+          <param name="teamcity.build.workingDir" value="project" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_5" name="Test Solution In A Container" type="simpleRunner">
+        <parameters>
+          <param name="plugin.docker.imageId" value="mcr.microsoft.com/dotnet/sdk:6.0" />
+          <param name="plugin.docker.imagePlatform" value="linux" />
+          <param name="plugin.docker.run.parameters"><![CDATA[--env ASPNETCORE_ENVIRONMENT=Build
+-v %system.teamcity.build.checkoutDir%/test-results:/src/results
+-v /var/run/docker.sock:/var/run/docker.sock]]></param>
+          <param name="script.content" value="dotnet test TCSonarCube.sln -r /src/results --logger 'trx;logfilename=testresults.trx' --nologo" />
+          <param name="teamcity.build.workingDir" value="project" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_6" name="Batect" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[#!/bin/bash
+chmod +x ./batect
+export BATECT_ENABLE_TELEMETRY=false
+pullRequestNumber="NOT_SET"
+if [ -n "%teamcity.pullRequest.number%" ]; then
+    pullRequestNumber="%teamcity.pullRequest.number%"
+fi
+./batect \
+--config-var TC_SONAR_QUBE_USE="%env.sonar_use%" \
+--config-var TC_SONAR_QUBE_SERVER=""%env.sonar_server%"" \
+--config-var TC_SONAR_QUBE_USER=""%env.sonar_user%"" \
+--config-var TC_SONAR_QUBE_PASSWORD=""%env.sonar_password%"" \
+--config-var TC_SONAR_QUBE_VERSION=""%build.counter%"" \
+--config-var TC_SONAR_QUBE_NUMBER=""$pullRequestNumber"" \
+run-tests]]></param>
+          <param name="teamcity.build.workingDir" value="./" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_7" name="Run Sonar Script" type="simpleRunner">
+        <parameters>
+          <param name="command.executable" value="ci/run-sonar.sh" />
+          <param name="command.parameters" value="-s &quot;&quot;%env.sonar_server%&quot;&quot; -u &quot;&quot;%env.sonar_user%&quot;&quot; -p &quot;&quot;%env.sonar_password%&quot;&quot; -n &quot;&quot;%teamcity.pullRequest.number%&quot;&quot; -v &quot;&quot;%build.counter%&quot;&quot;" />
+          <param name="log.stderr.as.errors" value="true" />
+          <param name="plugin.docker.imageId" value="jpspringall/dotnet-sonar-scanner:5.8.0" />
+          <param name="plugin.docker.imagePlatform" value="linux" />
+          <param name="plugin.docker.pull.enabled" value="true" />
+          <param name="plugin.docker.run.parameters" value="-v %system.teamcity.build.checkoutDir%/test-results:/test-results" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="TeamCitySubProjects_HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild" />
+    </vcs-settings>
+    <requirements />
+    <build-triggers>
+      <build-trigger id="TRIGGER_1" type="vcsTrigger">
+        <parameters>
+          <param name="branchFilter" value="+:*" />
+          <param name="enableQueueOptimization" value="true" />
+          <param name="quietPeriodMode" value="DO_NOT_USE" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <build-extensions>
+      <extension id="BUILD_EXT_1" type="xml-report-plugin">
+        <parameters>
+          <param name="verbose" value="true" />
+          <param name="xmlReportParsing.reportDirs" value="%system.teamcity.build.checkoutDir%/test-results/**/*.trx" />
+          <param name="xmlReportParsing.reportType" value="trx" />
+        </parameters>
+      </extension>
+    </build-extensions>
+    <cleanup />
+  </settings>
+</build-type>
+

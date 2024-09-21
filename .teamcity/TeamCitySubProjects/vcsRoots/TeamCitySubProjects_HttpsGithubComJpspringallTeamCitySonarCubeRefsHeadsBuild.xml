@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vcs-root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="" type="jetbrains.git" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
+  <name>Build VCS Root</name>
+  <param name="agentCleanFilesPolicy" value="ALL_UNTRACKED" />
+  <param name="agentCleanPolicy" value="ALWAYS" />
+  <param name="authMethod" value="PASSWORD" />
+  <param name="branch" value="refs/heads/master" />
+  <param name="ignoreKnownHosts" value="true" />
+  <param name="secure:password" value="credentialsJSON:e224d815-b2d6-4dc7-9e5c-11f7d85dbd51" />
+  <param name="submoduleCheckout" value="CHECKOUT" />
+  <param name="teamcity:branchSpec" value="%git.branch.specification%" />
+  <param name="url" value="https://github.com/jpspringall/team-city-sonar-cube" />
+  <param name="useAlternates" value="NO_MIRRORS" />
+  <param name="username" value="jpspringall" />
+  <param name="usernameStyle" value="USERID" />
+</vcs-root>
+
