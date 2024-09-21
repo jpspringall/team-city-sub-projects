@@ -117,7 +117,7 @@ object CommonSteps {
 
     fun BuildType.runSonarScript(
     ) {
-        //CHANGE THIS BEFORE USING FOR REALZ"
+        //CHANGE THIS BEFORE USING FOR REAL"
         val imageRepository = "jpspringall"
         //CHANGE THIS BEFORE USING FOR REALZ"
         steps {

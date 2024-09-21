@@ -72,8 +72,8 @@ object MasterBuild : BuildType({
     features {}
 })
 
-object PullRequestBuild : BuildType({
-    name = "Pull Request Build"
+object PullRequestBuildChange : BuildType({
+    name = "Pull Request Build Change"
 
     vcs {
         root(HttpsGithubComJpspringallTeamCitySonarCubeRefsHeadsBuild)
