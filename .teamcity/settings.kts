@@ -11,6 +11,7 @@ import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.ui.add
+import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -163,8 +164,23 @@ builds.add(MasterBuild)
 builds.add(PullRequestBuildChange)
 builds.add(DeployBuild)
 
+object VCSSubProjectRoot : GitVcsRoot({
+    id("SubProjectRoot")
+    name = "SubProject_Root"
+    url = "https://github.com/jpspringall/team-city-sub-projects"
+    branch = "refs/heads/master"
+    branchSpec = "%git.branch.specification%"
+    agentCleanPolicy = GitVcsRoot.AgentCleanPolicy.ALWAYS
+    checkoutPolicy = GitVcsRoot.AgentCheckoutPolicy.NO_MIRRORS
+    authMethod = token {
+        userName = "oauth2"
+        tokenId = "tc_token_id:CID_19a3f4f5d436b3ce0a7bf06f21adc120:-1:19d541a1-d9a1-4feb-9dcc-fe6c06b3a2fc"
+    }
+})
+
 val project = Project {
-    vcsRoot(DslContext.settingsRoot)
+
+    vcsRoot(VCSSubProjectRoot)
 
     builds.forEach{
         buildType(it)
