@@ -79,6 +79,9 @@ object PullRequestBuildChange : BuildType({
         root(DslContext.settingsRoot)
         cleanCheckout = true
         excludeDefaultBranchChanges = true
+        branchFilter = """
+            +:refs/pull/*/merge*
+        """.trimIndent()
     }
 
     params {
@@ -96,6 +99,9 @@ object PullRequestBuildChange : BuildType({
 
     triggers {
         vcs {
+            branchFilter = """
+            +:refs/pull/*/merge*
+        """.trimIndent()
         }
     }
 
