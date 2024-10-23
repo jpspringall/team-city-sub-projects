@@ -78,7 +78,6 @@ object PullRequestBuildChange : BuildType({
     vcs {
         root(DslContext.settingsRoot)
         cleanCheckout = true
-        excludeDefaultBranchChanges = true
         branchFilter = """
             +:refs/pull/*/merge*
         """.trimIndent()
